@@ -9,11 +9,10 @@ function App() {
   const secondaryColor = "#441FD8";
   return (
     <div className={"bg-[#F1F43B] text-[#441FD8]"}>
-      <header className="">
-        <Hero primaryColor={primaryColor} secondaryColor={secondaryColor} />
-      </header>
+      <Hero primaryColor={primaryColor} secondaryColor={secondaryColor} />
       <Intro secondaryColor={secondaryColor} />
       <SkillsMarquee loop={0} />
+      <div className="w-screen h-screen">work and projects</div>
       <Footer />
     </div>
   );

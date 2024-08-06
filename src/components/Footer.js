@@ -15,10 +15,30 @@ export const Footer = (props) => {
             <p>{"Kevin Rufino"}</p>
             <p>{"Brooklyn, NY"}</p>
             <br />
-            <p>{"Email"}</p>
-            <p>{"Resume"}</p>
-            <p>{"LinkedIn"}</p>
-            <p>{"Github"}</p>
+            <div className="flex flex-col">
+              <a href="mailto: kevinrufino97@gmail.com">{"Email"}</a>
+              <a
+                href="./Kevin Rufino Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {"Resume"}
+              </a>
+              <a
+                href="https://www.linkedin.com/in/kevinrufino/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {"LinkedIn"}
+              </a>
+              <a
+                href="https://github.com/kevinrufino"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {"Github"}
+              </a>
+            </div>
           </div>
         </div>
       </div>
