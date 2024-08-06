@@ -2,16 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "OffBit-101";
+  src: url("../public/fonts/OffBit-101.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "OffBit-101-Bold";
+  src: url("../public/fonts/OffBit-101Bold.otf") format("openType");
+}
+
+@font-face {
+  font-family: "OffBit-Regular";
+  src: url("../public/fonts/OffBit-Regular.otf") format("openType");
+}
+
+@font-face {
+  font-family: "OffBit-Bold";
+  src: url("../public/fonts/OffBit-Bold.otf") format("openType");
+}
+
+@font-face {
+  font-family: "Plumpelo";
+  src: url("../public/fonts/Plumpelo-Pixelated-2.otf") format("openType");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

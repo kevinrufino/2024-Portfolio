@@ -1,22 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Hero } from "./components/Hero";
 
 function App() {
+  const primaryColor = "#F1F43B";
+  const secondaryColor = "#441FD8";
   return (
-    <div className="bg-[#F1F43B]">
+    <div className={`bg-[${primaryColor}]`}>
       <header className="">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className='text-[#441FD8]'>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Hero primaryColor={primaryColor} secondaryColor={secondaryColor} />
       </header>
     </div>
   );
