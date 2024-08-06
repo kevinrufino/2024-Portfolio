@@ -7,6 +7,7 @@ module.exports = {
       offbit101Bold: ["OffBit-101-Bold"],
       offbit: ["OffBit-Regular"],
       offbitBold: ["OffBit-Bold"],
+      offbitDot: ["OffBit-Dot"],
       plumpelo: ["Plumpelo"],
     },
   },

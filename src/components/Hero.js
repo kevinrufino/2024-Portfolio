@@ -2,6 +2,9 @@ import { HeroFillName } from "./HeroFillName";
 import { HeroName } from "./HeroName";
 
 export const Hero = (props) => {
+  // get height of container (screen size)
+  // get height of elements
+  // calulate how many elements can fit in the container
   return (
     <div className="w-screen h-screen p-4">
       <HeroFillName color="#441FD8" className="-mb-20" />
