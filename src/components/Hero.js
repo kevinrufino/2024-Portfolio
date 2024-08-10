@@ -1,5 +1,6 @@
 import { HeroFillName } from "./HeroFillName";
 import { HeroName } from "./HeroName";
+import React from "react";
 
 export const Hero = (props) => {
   // get height of container (screen size)

@@ -1,3 +1,5 @@
+import React from "react";
+
 export const HeroName = (props) => {
   return (
     <svg

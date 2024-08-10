@@ -1,4 +1,5 @@
 import Marquee from "react-fast-marquee";
+import React from "react";
 
 export const SkillsMarquee = (props) => {
   return (

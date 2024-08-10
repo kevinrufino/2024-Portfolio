@@ -34,7 +34,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^9.8.0",
+    "eslint": "^9.9.0",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-react": "^7.35.0",
     "globals": "^15.9.0",

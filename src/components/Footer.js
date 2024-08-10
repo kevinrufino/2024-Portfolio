@@ -1,5 +1,6 @@
 import pixelSelfie from "../pixel-selfie.png";
 import smile from "../smile.svg";
+import React from "react";
 
 export const Footer = (props) => {
   return (

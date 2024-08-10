@@ -1,5 +1,6 @@
 import Typewriter from "typewriter-effect";
 import clsx from "clsx";
+import React from "react";
 
 export const Intro = (props) => {
   return (
