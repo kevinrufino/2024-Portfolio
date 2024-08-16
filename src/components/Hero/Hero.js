@@ -7,7 +7,7 @@ export const Hero = (props) => {
   // get height of elements
   // calulate how many elements can fit in the container
   return (
-    <div className="w-screen h-screen p-4">
+    <div className="w-screen h-screen p-4" id="home">
       <HeroFillName color="#441FD8" className="-mb-20" />
       <HeroName
         primaryColor={props.primaryColor}

@@ -1,17 +1,20 @@
-import pixelSelfie from "../pixel-selfie.png";
-import smile from "../smile.svg";
 import React from "react";
 
 export const Footer = (props) => {
   return (
-    <footer className="max-w-4xl m-auto flex flex-col">
+    <footer className="max-w-4xl m-auto flex flex-col" id="contact">
       <div className="font-offbit101Bold">
         <div className="flex max-w-md ml-4">
           <p className="text-5xl m-2">{"Lets Connect"}</p>
-          <img src={smile} alt="smile" className="p-2" />
+          <img src="/smile.svg" alt="smile" className="p-2" />
         </div>
         <div className="flex text-3xl m-4">
-          <img src={pixelSelfie} alt="it's a me" width={240} className="m-2" />
+          <img
+            src="/pixel-selfie.png"
+            alt="it's a me"
+            width={240}
+            className="m-2"
+          />
           <div className="m-2">
             <p>{"Kevin Rufino"}</p>
             <p>{"Brooklyn, NY"}</p>
@@ -19,7 +22,7 @@ export const Footer = (props) => {
             <div className="flex flex-col">
               <a href="mailto: kevinrufino97@gmail.com">{"Email"}</a>
               <a
-                href="./Kevin Rufino Resume.pdf"
+                href="./Kevin Rufino Resume 2024.pdf"
                 target="_blank"
                 rel="noreferrer"
               >
