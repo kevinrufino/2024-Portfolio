@@ -6,14 +6,14 @@ export const NavBar = (props) => {
   // https://gist.github.com/emorgado/13fd13f8aea42c2a959617ea6e913d31
   // https://2015.xoxofest.com/
   return (
-    <div className="mix-blend-normal flex flex-col fixed top-2 font-offbit101Bold text-4xl drop-shadow-[1px_1px_1px_rgba(241,244,59)]">
-      <a href="#home" className="mx-2">
+    <div className="mix-blend-difference flex flex-col fixed top-2 font-offbit101Bold text-white text-4xl">
+      <a href="#home" className="mx-2 hover:underline">
         {"Home"}
       </a>
-      <a href="#projects" className="mx-2">
+      <a href="#projects" className="mx-2 hover:underline">
         {"Projects"}
       </a>
-      <a href="#contact" className="mx-2">
+      <a href="#contact" className="mx-2 hover:underline">
         {"Contact"}
       </a>
     </div>
