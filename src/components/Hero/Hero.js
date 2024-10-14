@@ -8,37 +8,37 @@ export const Hero = (props) => {
   // calulate how many elements can fit in the container
   return (
     <div className="w-screen h-screen p-4" id="home">
-      <HeroFillName color="#441FD8" className="-mb-20" />
+      <HeroFillName color="#3e3bf4" className="-mb-20" />
       <HeroName
         primaryColor={props.primaryColor}
         secondaryColor={props.secondaryColor}
         className="-mb-20"
       />
-      <HeroFillName color="#441FD8" className="-mb-20" />
+      <HeroFillName color="#3e3bf4" className="-mb-20" />
       <HeroName
         primaryColor={props.primaryColor}
         secondaryColor={props.secondaryColor}
         className="-mb-20"
       />
-      <HeroFillName color="#441FD8" className="-mb-20" />
+      <HeroFillName color="#3e3bf4" className="-mb-20" />
       <HeroName
         primaryColor={props.primaryColor}
         secondaryColor={props.secondaryColor}
         className="-mb-20"
       />
-      <HeroFillName color="#441FD8" className="-mb-20" />
+      <HeroFillName color="#3e3bf4" className="-mb-20" />
       <HeroName
         primaryColor={props.primaryColor}
         secondaryColor={props.secondaryColor}
         className="-mb-20"
       />
-      <HeroFillName color="#441FD8" className="-mb-20" />
+      <HeroFillName color="#3e3bf4" className="-mb-20" />
       <HeroName
         primaryColor={props.primaryColor}
         secondaryColor={props.secondaryColor}
         className="-mb-20"
       />
-      <HeroFillName color="#441FD8" className="-mb-20" />
+      <HeroFillName color="#3e3bf4" className="-mb-20" />
       <HeroName
         primaryColor={props.primaryColor}
         secondaryColor={props.secondaryColor}
