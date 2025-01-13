@@ -1,0 +1,12 @@
+{
+  "env": {
+    "es6": true, // to use ES6 features
+    "browser": true, // to use document, setTimeout, window and other browser things
+    "node": true // to use http, require and other node things
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  }
+}

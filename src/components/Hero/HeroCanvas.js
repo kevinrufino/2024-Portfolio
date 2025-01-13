@@ -1,22 +1,23 @@
 import React, { useEffect, useRef } from "react";
-import Matter, {
+import {
   Engine,
   Render,
   Runner,
   Bodies,
-  World,
   Composite,
   Mouse,
   MouseConstraint,
 } from "matter-js";
 
-// @TODO: FIX MOUSE DRAG
 // @TODO: FIX shape of bodies
 // @TODO: Initial placement of bodies in hero section
-// @TODO: Wiggle lines?
+// @TODO: FIX MOUSE DRAG ...
+// @TODO: Fix mouse events ...
 
-export function HeroCanvas(props) {
-  const canvasRef = useRef(null);
+// @TODO: (nice to have) Wiggle lines?
+
+export function HeroCanvas() {
+  const elementRef = useRef(null);
   // const isPressed = useRef(false);
   const engine = useRef(Engine.create());
   const world = engine.current.world;
@@ -30,30 +31,34 @@ export function HeroCanvas(props) {
 
     const render = Render.create({
       engine: engine.current,
-      element: canvasRef.current,
+      element: elementRef.current,
       options: {
         width: cw,
         height: ch,
         wireframes: true,
-        background: "transparent",
+        background: "#000000",
       },
     });
+
+    //optional
+    Runner.run(runner.current, engine.current);
 
     // add mouse control
-    const mouse = Mouse.create(render.canvas);
-    render.mouse = mouse;
-    const mouseConstraint = MouseConstraint.create(engine, {
-      mouse: mouse,
-      constraint: {
-        stiffness: 0.2,
-        render: {
-          visible: true,
+    const mouse = Mouse.create(render.element),
+      mouseConstraint = MouseConstraint.create(engine, {
+        mouse: mouse,
+        constraint: {
+          stiffness: 0.2,
+          render: {
+            visible: true,
+          },
         },
-      },
-    });
-    render.mouseConstraint = mouseConstraint;
+      });
+    render.mouse = mouse;
 
     Composite.add(world, mouseConstraint);
+
+    console.log("render", render);
 
     Composite.add(world, [
       // Bodies.rectangle(cw / 2, ih, cw, 1, { isStatic: true }),
@@ -78,9 +83,6 @@ export function HeroCanvas(props) {
     ]);
 
     Render.run(render);
-
-    //optional
-    Runner.run(runner.current, engine.current);
 
     return () => {
       Render.stop(render);
@@ -124,11 +126,15 @@ export function HeroCanvas(props) {
 
   return (
     <div
-      ref={canvasRef}
+      ref={elementRef}
       style={{
-        width: "0vw",
-        height: "0vh",
-        // pointerEvents: "none",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: -1,
+        pointerEvents: "auto",
         mixBlendMode: "difference",
       }}
       onClick={handleAddCircle}

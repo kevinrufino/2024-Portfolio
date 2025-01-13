@@ -11,5 +11,6 @@
   "vs-code-prettier-eslint.prettierLast": false, // set as "true" to run 'prettier' last not first
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "prettier.requireConfig": true
 }
