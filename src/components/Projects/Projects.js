@@ -1,6 +1,6 @@
 import { ProjectsData } from "../../constants.js";
-import { ProjectVideo } from "./Video.js";
-import { ProjectInfo } from "./Info";
+import { ProjectVideo } from "./ProjectVideo.js";
+import { ProjectInfo } from "./ProjectInfo.js";
 
 export const Projects = (props) => {
   return (
@@ -12,7 +12,12 @@ export const Projects = (props) => {
               className="flex flex-col md:flex-row justify-center items-center m-3 my-6"
               key={i.title}
             >
-              <ProjectVideo src={i.scrapeGif} />
+              <ProjectVideo
+                src={i.scrapeGif}
+                title={i.title}
+                cursor={props.cursor}
+                setCursor={props.setCursor}
+              />
               <ProjectInfo {...i} />
             </div>
           );
