@@ -12,12 +12,15 @@ function App() {
   const primaryColor = "#F1F43B";
   const secondaryColor = "#3e3bf4";
   return (
-    <div className={"bg-[#F1F43B] text-[#3e3bf4] scroll-smooth"}>
+    <div className={"bg-[#F1F43B] text-[#3e3bf4] scroll-smooth -z-2"}>
+      <p className="text-[#F1F43B]">if you're reading this, you found a secret ;p</p>
       <NavBar />
-      <HeroCanvas />
-      <Hero primaryColor={primaryColor} secondaryColor={secondaryColor} />
+      {/* <HeroCanvas /> */}
+      {/* @TODO: fix overflow x */}
+      {/* <Hero primaryColor={primaryColor} secondaryColor={secondaryColor} /> */}
       <Intro secondaryColor={secondaryColor} />
       <SkillsMarquee loop={0} />
+      {/* @TODO: fix overflow x */}
       <Projects />
       <Footer />
     </div>
