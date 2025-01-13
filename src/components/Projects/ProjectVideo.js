@@ -16,7 +16,7 @@ export const ProjectVideo = (props) => {
         autoPlay
         loop
         muted
-        playsinline
+        playsInline
       />
       {/* @TODO: update mask to pixelated mask */}
       <div className="mask">
