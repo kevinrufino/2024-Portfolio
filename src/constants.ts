@@ -17,18 +17,18 @@ export const snkybotLink = "https://github.com/kevinrufino/SNK-Y-Bot";
 
 // Project Scrape Gifs
 
-export const MCScrapeGif = "/Project-Scrape-Gifs/mc-scrape.gif";
-export const MaxsLabScrapeGif = "";
-export const swoosh404ScrapeGif = "";
-export const dogewoodScrapeGif = "";
-export const anonymiceScrapeGif = "";
-export const snkybotScrapeGif = "";
+export const MCScrapeGif = "/Project-Scrape-Gifs/Minecraft-Scrape-Video.mp4";
+export const MaxsLabScrapeGif = "/Project-Scrape-Gifs/maxs-lab-video.mp4";
+export const swoosh404ScrapeGif = "/Project-Scrape-Gifs/404-error-scrape.mp4";
+export const dogewoodScrapeGif = "/Project-Scrape-Gifs/dogewood-scrape-video.mp4";
+export const anonymiceScrapeGif = "/Project-Scrape-Gifs/cheeth-page-1280.webp";
+export const snkybotScrapeGif = "/Project-Scrape-Gifs/SNKY-Bot-1280.webp";
 
 // Project Hover Gifs
 
-export const MCGif = "/Project-Hover-Gifs/mc-spinning-block 1.gif";
-export const MaxsLabGif = "";
-export const swoosh404Gif = "";
-export const dogewoodGif = "";
-export const anonymiceGif = "";
-export const snkybotGif = "";
+export const MCGif = "/Project-Hover-Gifs/mc-spinning-block.gif";
+export const MaxsLabGif = "/Project-Hover-Gifs/maxs-lab-gif.webm";
+export const swoosh404Gif = "/Project-Hover-Gifs/404spinning-asset.gif";
+export const dogewoodGif = "/Project-Hover-Gifs/dogewood-gif.gif";
+export const anonymiceGif = "/Project-Hover-Gifs/mice-gif.gif";
+export const snkybotGif = "/Project-Hover-Gifs/battlebot_run.gif";
