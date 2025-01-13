@@ -21,9 +21,9 @@ export const MCScrapeGif = "Minecraft-Scrape-Video.mp4";
 export const MaxsLabScrapeGif = "maxs-lab-video.mp4";
 export const swoosh404ScrapeGif = "404-error-scrape.mp4";
 export const dogewoodScrapeGif =
-  "dogewood-scrape-video.mp4";
-export const anonymiceScrapeGif = "cheeth-page-1280.webp";
-export const snkybotScrapeGif = "SNKY-Bot-1280.webp";
+  "dogewood-scrape.mp4";
+export const anonymiceScrapeGif = "cheeth-scrape-video.mp4";
+export const snkybotScrapeGif = "SNKY-Bot-scrape-video.mp4";
 
 // Project Hover Gifs
 
