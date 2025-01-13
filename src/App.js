@@ -1,12 +1,12 @@
 import "./App.css";
-import { Footer } from "./components/Footer";
-import { Hero } from "./components/Hero/Hero";
-import { Intro } from "./components/Intro/Intro";
-import { NavBar } from "./components/Nav";
-import { Projects } from "./components/Projects/Projects";
-import { SkillsMarquee } from "./components/Intro/SkillsMarquee";
-import { HeroCanvas } from "./components/Hero/HeroCanvas";
-import Cursor from "./components/Cursor";
+import { Footer } from "./components/Footer.js";
+import { Hero } from "./components/Hero/Hero.js";
+import { Intro } from "./components/Intro/Intro.js";
+import { NavBar } from "./components/Nav.js";
+import { Projects } from "./components/Projects/Projects.js";
+import { SkillsMarquee } from "./components/Intro/SkillsMarquee.js";
+import { HeroCanvas } from "./components/Hero/HeroCanvas.js";
+import Cursor from "./components/Cursor.js";
 import React from "react";
 
 function App() {

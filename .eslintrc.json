@@ -4,7 +4,7 @@
     "browser": true, // to use document, setTimeout, window and other browser things
     "node": true // to use http, require and other node things
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": true

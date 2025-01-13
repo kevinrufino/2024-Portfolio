@@ -1,5 +1,5 @@
-import { HeroFillName } from "./HeroFillName";
-import { HeroName } from "./HeroName";
+import { HeroFillName } from "./HeroFillName.js";
+import { HeroName } from "./HeroName.js";
 import React, { useRef, useState, useEffect } from "react";
 
 export const Hero = (props) => {
