@@ -4,6 +4,10 @@
     "browser": true, // to use document, setTimeout, window and other browser things
     "node": true // to use http, require and other node things
   },
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  },
+  "extends": ["plugin:react/jsx-runtime"],
   "parser": "@babel/eslint-parser",
   "parserOptions": {
     "sourceType": "module",

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const NavBar = (props) => {
+export const NavBar = () => {
   return (
     <div className="mix-blend-difference flex flex-col fixed top-2 font-offbit101Bold text-white text-4xl z-10">
       <a href="#home" className="mx-2 hover:underline">

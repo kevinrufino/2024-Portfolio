@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Footer = (props) => {
+export const Footer = () => {
   return (
     <footer className="max-w-4xl m-auto flex flex-col" id="contact">
       <div className="font-offbit101Bold">

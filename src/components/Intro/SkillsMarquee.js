@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SkillsMarquee = (props) => {
+export const SkillsMarquee = () => {
   return (
     <marquee className="text-3xl">
       <div className="flex flex flex-row">

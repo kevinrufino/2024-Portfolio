@@ -15,6 +15,8 @@ export const anonymiceLink = "https://anonymice.com/";
 
 export const snkybotLink = "https://github.com/kevinrufino/SNK-Y-Bot";
 
+// @TODO add poster CDP page
+
 // Project Scrape Gifs
 
 export const MCScrapeGif = "Minecraft-Scrape-Video.mp4";
@@ -24,6 +26,7 @@ export const dogewoodScrapeGif =
   "dogewood-scrape.mp4";
 export const anonymiceScrapeGif = "cheeth-scrape-video.mp4";
 export const snkybotScrapeGif = "SNKY-Bot-scrape-video.mp4";
+// @TODO add poster CDP page
 
 export const ProjectsData = [
   {
@@ -90,4 +93,5 @@ export const ProjectsData = [
     }],
     scrapeGif: snkybotScrapeGif,
   },
+  // @TODO add poster CDP page
 ];

@@ -1,18 +1,9 @@
 import React from "react";
 
 // eslint-disable-next-line react/prop-types
-export const ProjectVideo = ({ cursor, setCursor, title, src }) => {
+export const ProjectVideo = ({ src }) => {
   return (
-    <div
-      className="md:w-2/3 scroller md:m-6"
-      onMouseEnter={() => {
-        if (!cursor == title) {
-          console.log("cursor: ", cursor, "title: ", title);
-          setCursor(title);
-        }
-      }}
-      onMouseLeave={() => setCursor("")}
-    >
+    <div className="md:w-2/3 scroller md:m-6">
       <video
         className="h-full w-full object-cover video"
         src={src}

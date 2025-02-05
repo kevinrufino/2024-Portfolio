@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { useSpring, animated } from "react-spring";
 import spinningShoe from "../assets/404spinning-asset.gif";
@@ -5,34 +6,35 @@ import bot from "../assets/battlebot_run.gif";
 import doge from "../assets/dogewood-gif.gif";
 import mc from "../assets/mc-spinning-block.gif";
 import mice from "../assets/mice-gif.gif";
-import maxsLab from "../assets/maxs-lab-gif.webm";
+// import maxsLab from "../assets/maxs-lab-gif.gif";
+// @TODO add poster CDP page
 
-const Cursor = (props) => {
+const Cursor = ({ cursor }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  //@TODO: add cursor selector
-  let cursor;
-  switch (props.cursor) {
-    case "Max's Lab":
-      cursor = maxsLab;
-      break;
+  let cursorImg;
+  switch (cursor) {
+    // @TODO: replace max's lab with a new gif
+    // case "Max's Lab":
+    //   cursorImg = maxsLab;
+    //   break;
     case "Minecraft Clone":
-      cursor = mc;
+      cursorImg = mc;
       break;
     case ".Swoosh 404":
-      cursor = spinningShoe;
+      cursorImg = spinningShoe;
       break;
     case "Defenders of Dogewood":
-      cursor = doge;
+      cursorImg = doge;
       break;
     case "Anonymice":
-      cursor = mice;
+      cursorImg = mice;
       break;
     case "SNK-Y Bot":
-      cursor = bot;
+      cursorImg = bot;
       break;
     default:
-      cursor = "";
+      cursorImg = "";
   }
 
   const animatedStyles = useSpring({
@@ -53,22 +55,24 @@ const Cursor = (props) => {
   }, []);
 
   return (
-    <animated.div
-      style={{
-        position: "absolute",
-        width: 150,
-        height: 150,
-        overflow: "hidden",
-        zIndex: 9999,
-        ...animatedStyles,
-      }}
-    >
-      <img
-        src={spinningShoe}
-        className="h-full w-full object-cover"
-        alt="hello"
-      />
-    </animated.div>
+    cursorImg && (
+      <animated.div
+        style={{
+          position: "absolute",
+          width: 150,
+          height: 150,
+          overflow: "hidden",
+          zIndex: 9999,
+          ...animatedStyles,
+        }}
+      >
+        <img
+          src={cursorImg}
+          className="h-full w-full object-cover overflow-hidden"
+          alt="hello"
+        />
+      </animated.div>
+    )
   );
 };
 
