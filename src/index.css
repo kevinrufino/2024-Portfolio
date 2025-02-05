@@ -38,9 +38,9 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -115,13 +115,14 @@ path {
   fill: none;
   stroke: #000;
   stroke-width: 46px;
-  stroke-dasharray: 4400;
-  stroke-dashoffset: 4400;
-  view-timeline-name: --scribble-path;
+  /* @TODO: move to js, safari on iphone not supported yet */
+  /* stroke-dasharray: 4400;
+  stroke-dashoffset: 4400; */
+  /* view-timeline-name: --scribble-path;
   view-timeline-axis: block;
   animation: linear draw both;
   animation-timeline: --scribble-path;
-  animation-range: entry 0% cover 50%;
+  animation-range: entry 0% cover 50%; */
 }
 
 @keyframes draw {
