@@ -7,17 +7,15 @@ import doge from "../assets/dogewood-gif.gif";
 import mc from "../assets/mc-spinning-block.gif";
 import mice from "../assets/mice-gif.gif";
 // import maxsLab from "../assets/maxs-lab-gif.gif";
-// @TODO add poster CDP page
 
 const Cursor = ({ cursor }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   let cursorImg;
   switch (cursor) {
-    // @TODO: replace max's lab with a new gif
-    // case "Max's Lab":
-    //   cursorImg = maxsLab;
-    //   break;
+    case "Max's Lab":
+      cursorImg = spinningShoe;
+      break;
     case "Minecraft Clone":
       cursorImg = mc;
       break;

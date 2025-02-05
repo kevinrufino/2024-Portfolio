@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import { Footer } from "./components/Footer.js";
 import { Intro } from "./components/Intro/Intro.js";
 import { NavBar } from "./components/Nav.js";
@@ -9,9 +9,8 @@ import Cursor from "./components/Cursor.js";
 // import { HeroCanvas } from "./components/Hero/HeroCanvas.js";
 // import { Hero } from "./components/Hero/Hero.js";
 
-
 function App() {
-  const [cursor, setCursor] = React.useState("");
+  const [cursor, setCursor] = useState("");
   // const primaryColor = "#F1F43B";
   const secondaryColor = "#3e3bf4";
   return (

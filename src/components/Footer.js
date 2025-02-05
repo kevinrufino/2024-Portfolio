@@ -1,8 +1,15 @@
 import React from "react";
 
-export const Footer = () => {
+// eslint-disable-next-line react/prop-types
+export const Footer = ({ setCursor }) => {
   return (
-    <footer className="max-w-4xl m-auto flex flex-col" id="contact">
+    <footer
+      className="max-w-4xl m-auto flex flex-col"
+      id="contact"
+      onMouseEnter={() => {
+        setCursor("");
+      }}
+    >
       <div className="font-offbit101Bold">
         <div className="flex max-w-md ml-4">
           <p className="text-2xl md:text-5xl m-2">{"Lets Connect"}</p>
