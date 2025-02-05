@@ -92,7 +92,7 @@
     nekoEl.style.position = "fixed";
     nekoEl.style.pointerEvents = "auto";
     nekoEl.style.imageRendering = "pixelated";
-    nekoEl.style.left = `${nekoPosX - 16}px`;
+    nekoEl.style.right = `${nekoPosX - 16}px`;
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = 20;
 
@@ -243,7 +243,9 @@
 
   function frame() {
     frameCount += 1;
-    const diffX = nekoPosX - mousePosX;
+    const diffX =
+      nekoPosX -
+      (nekoEl.parentElement.getBoundingClientRect().width - mousePosX);
     const diffY = nekoPosY - mousePosY;
     const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
 

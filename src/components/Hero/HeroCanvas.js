@@ -26,7 +26,7 @@ export function HeroCanvas() {
   useEffect(() => {
     const cw = document.body.clientWidth;
     const ch = document.body.clientHeight;
-    const iw = window.innerWidth;
+    // const iw = window.innerWidth;
     const ih = window.innerHeight;
 
     const render = Render.create({
