@@ -31,6 +31,15 @@ const Cursor = ({ cursor }) => {
     case "SNK-Y Bot":
       cursorImg = bot;
       break;
+    case "EA Sports FC Partner Page":
+      cursorImg = spinningShoe;
+      break;
+    case "TINAJ Collection Listing Page":
+      cursorImg = spinningShoe;
+      break;
+    case "Our Force 1 Poster Content Display Page":
+      cursorImg = spinningShoe;
+      break;
     default:
       cursorImg = "";
   }

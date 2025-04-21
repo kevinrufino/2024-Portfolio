@@ -15,7 +15,11 @@ export const anonymiceLink = "https://anonymice.com/";
 
 export const snkybotLink = "https://github.com/kevinrufino/SNK-Y-Bot";
 
-// @TODO add poster CDP page
+export const OurForce1CDPLink = "https://www.swoosh.nike/collections/our-force-1-poster";
+
+export const EAFCPartnerPageLink = "https://www.swoosh.nike/p/ea-sports-fc";
+
+export const TINAJCLPLink = "https://www.swoosh.nike/collections/our-force-1-tinaj/products/air-force-1-tinaj/tokens/301?tab=story";
 
 // Project Scrape Gifs
 
@@ -26,7 +30,9 @@ export const dogewoodScrapeGif =
   "dogewood-scrape.mp4";
 export const anonymiceScrapeGif = "cheeth-scrape-video.mp4";
 export const snkybotScrapeGif = "SNKY-Bot-scrape-video.mp4";
-// @TODO add poster CDP page
+export const OF1PosterCDPGif = "OF1-Poster-CDP.mp4";
+export const EAFCPartnerPageGif = "EAFC-Page.mp4";
+export const TINAJCLPGif = "TINAJ-CLP.mp4";
 
 export const ProjectsData = [
   {
@@ -40,6 +46,16 @@ export const ProjectsData = [
     scrapeGif: MaxsLabScrapeGif,
   },
   {
+    title: "Our Force 1 Poster Content Display Page",
+    technology: ["React", "Three.js", "Next.js"],
+    description:
+      "I lead and architected a custom content display page for our OF1 Poster Collection. This page gave users a chance to dive into the world of our NFT collection through an engaging and beatiful page. I helped engineer our sites CMS implementation and created custom and authorable component blocks utilizing cool design features such a paralax effects and cool custom 3D shader to give the posters a wavey effect. I worked with designers and project managers to bring this to our loyal community.",
+    links: [{
+      "Check Out the CDP!": OurForce1CDPLink
+    }],
+    scrapeGif: OF1PosterCDPGif,
+  },
+  {
     title: ".Swoosh 404",
     technology: ["React", "Canvas", "Next.js"],
     description:
@@ -48,6 +64,15 @@ export const ProjectsData = [
       "Check out the .Swoosh Platform!": swoosh404Link
     }],
     scrapeGif: swoosh404ScrapeGif,
+  },
+  {
+    title: "EA Sports FC Partner Page",
+    technology: ["React", "Three.js", "Next.js"],
+    description: "I helped engineer the authorable custom component/block system for our site, allowing us to build reusable components that can be brought into any page. Using that block system I helped developeed this interable 3D player viewer and FAQ custom component. This page was built to support the launch of the EA Sports FC game and was a collaboration with the EA team.",
+    links: [{
+      "Check out the EA Partner Page!": EAFCPartnerPageLink
+    }],
+    scrapeGif: EAFCPartnerPageGif,
   },
   {
     title: "Minecraft Clone",
@@ -63,6 +88,15 @@ export const ProjectsData = [
       }
     ],
     scrapeGif: MCScrapeGif,
+  },
+  {
+    title: "TINAJ Collection Listing Page",
+    technology: ["React", "Three.js", "Next.js"],
+    description:"I helped build this page and an authorable and scalable 3D virtual product viewer that can support the display and control of any customizable virtual collectable. These collectables have mutiple traits, animations, and control types.",
+    links: [{
+      "Check out the CLP!": TINAJCLPLink
+    }],
+    scrapeGif: TINAJCLPGif,
   },
   {
     title: "Defenders of Dogewood",
@@ -93,5 +127,4 @@ export const ProjectsData = [
     }],
     scrapeGif: snkybotScrapeGif,
   },
-  // @TODO add poster CDP page
 ];
