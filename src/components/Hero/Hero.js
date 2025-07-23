@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import LayeredName from './LayeredName.js';
-import { useRef, useState, useEffect } from 'react';
+import React from "react";
+import PropTypes from "prop-types";
+import LayeredName from "./LayeredName.js";
+import { useRef, useState, useEffect } from "react";
 
 export const Hero = ({ primaryColor, secondaryColor, setCursor }) => {
   const ref = useRef(null);
@@ -16,10 +16,10 @@ export const Hero = ({ primaryColor, secondaryColor, setCursor }) => {
       }
     }
   }, [ref.current, primaryColor, secondaryColor]);
-  
+
   return (
-    <div 
-      className="relative flex flex-col items-center justify-center w-full h-screen p-2" 
+    <div
+      className="relative flex flex-col items-center justify-center w-full h-screen p-2"
       onMouseEnter={() => {
         setCursor("");
       }}
@@ -28,10 +28,14 @@ export const Hero = ({ primaryColor, secondaryColor, setCursor }) => {
       {/* Hidden for measuring */}
       <div className="w-full invisible absolute top-0">
         <div className="w-full" ref={ref}>
-          <LayeredName primaryColor={primaryColor} secondaryColor={secondaryColor} />
+          <LayeredName
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+          />
         </div>
       </div>
       {/* Actual visible stack */}
+      {/* @TODO: add animation for loading in */}
       {Array.from({ length: count - 1 }).map((_, i) => (
         <LayeredName
           key={i}

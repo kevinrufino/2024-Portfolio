@@ -19,7 +19,7 @@ function App() {
     "Intro",
     "SkillsMarquee",
     "Projects",
-    "Footer"
+    "Footer",
   ];
   const [progress, setProgress] = useState(0);
   const total = componentsToLoad.length;
@@ -29,7 +29,7 @@ function App() {
     // @TODO: check if all components are loaded
     // Simulate loading each component one by one
     if (progress < total) {
-      const timeout = setTimeout(() => setProgress(p => p + 1), 350);
+      const timeout = setTimeout(() => setProgress((p) => p + 1), 350);
       return () => clearTimeout(timeout);
     } else {
       const done = setTimeout(() => setLoading(false), 400);
@@ -40,7 +40,15 @@ function App() {
   const primaryColor = "#F1F43B";
   const secondaryColor = "#3e3bf4";
   if (loading) {
-    return <LoadingScreen progress={progress} total={total} primaryColor={primaryColor} secondaryColor={secondaryColor} setCursor={setCursor}/>;
+    return (
+      <LoadingScreen
+        progress={progress}
+        total={total}
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
+        setCursor={setCursor}
+      />
+    );
   }
   return (
     <div
@@ -54,7 +62,11 @@ function App() {
       <Cursor cursor={cursor} setCursor={setCursor} />
       <NavBar setCursor={setCursor} />
       {/* <HeroCanvas /> */}
-      <Hero primaryColor={primaryColor} secondaryColor={secondaryColor} setCursor={setCursor}/>
+      <Hero
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
+        setCursor={setCursor}
+      />
       <Intro
         secondaryColor={secondaryColor}
         cursor={cursor}

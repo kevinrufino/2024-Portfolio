@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 export const NavBar = ({ setCursor }) => {
   return (
-    <div 
-      className="mix-blend-difference flex flex-col fixed top-2 font-offbit101Bold text-white text-4xl z-10" 
+    <div
+      className="mix-blend-difference flex flex-col fixed top-2 font-offbit101Bold text-white text-4xl z-10"
       onMouseEnter={() => {
-        setCursor("")
+        setCursor("");
       }}
     >
       <a href="#home" className="mx-2 hover:underline">
@@ -28,4 +28,3 @@ export const NavBar = ({ setCursor }) => {
 NavBar.propTypes = {
   setCursor: PropTypes.func.isRequired,
 };
-  
