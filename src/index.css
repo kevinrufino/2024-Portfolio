@@ -90,8 +90,10 @@ code {
   -webkit-mask-image: url(/public/scribble-png.png);
   mask-image: url(/public/scribble-png.png);
   mask-size: 85%;
-  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
   & > * {
     grid-area: 1 / 1;
     width: 100%;
@@ -111,7 +113,22 @@ code {
   background: #f1f43b;
 }
 
-path {
+.loading-mask {
+  -webkit-mask-image: url('/public/HeroFillName.svg');
+  mask-image: url('/public/HeroFillName.svg');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: auto;
+  mask-size: auto;
+}
+
+.loading-mask-bar {
+  mix-blend-mode: difference;
+}
+
+/* path {
   fill: none;
   stroke: #000;
   stroke-width: 46px;
@@ -122,8 +139,8 @@ path {
   view-timeline-axis: block;
   animation: linear draw both;
   animation-timeline: --scribble-path;
-  animation-range: entry 0% cover 50%; */
-}
+  animation-range: entry 0% cover 50%; 
+} */
 
 @keyframes draw {
   to {

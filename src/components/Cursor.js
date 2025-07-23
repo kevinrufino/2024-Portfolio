@@ -12,9 +12,11 @@ const Cursor = ({ cursor }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   let cursorImg;
+  let cursorColor;
   switch (cursor) {
     case "Max's Lab":
       cursorImg = spinningShoe;
+      cursorColor = { filter: 'brightness(1.2) hue-rotate(40deg)' }
       break;
     case "Minecraft Clone":
       cursorImg = mc;
@@ -33,12 +35,15 @@ const Cursor = ({ cursor }) => {
       break;
     case "EA Sports FC Partner Page":
       cursorImg = spinningShoe;
+      cursorColor = { filter: 'brightness(1.2) hue-rotate(300deg)' }
       break;
     case "TINAJ Collection Listing Page":
       cursorImg = spinningShoe;
+      cursorColor = { filter: 'brightness(1.2) hue-rotate(150deg) grayscale(1)' }
       break;
     case "Our Force 1 Poster Content Display Page":
       cursorImg = spinningShoe;
+      cursorColor = { filter: 'brightness(1.2) hue-rotate(250deg)' }
       break;
     default:
       cursorImg = "";
@@ -71,6 +76,7 @@ const Cursor = ({ cursor }) => {
           overflow: "hidden",
           zIndex: 9999,
           ...animatedStyles,
+          ...cursorColor,
         }}
       >
         <img

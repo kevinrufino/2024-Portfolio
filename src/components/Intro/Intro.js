@@ -6,8 +6,7 @@ export const Intro = ({ setCursor }) => {
   return (
     <section
       className="max-w-4xl my-16 px-5 md:my-32 flex flex-col flex-wrap space-y-16 md:space-y-0 patterns m-4 md:m-auto"
-      // @TODO: make id intro once hero is fixed
-      id="home"
+      id="intro"
       onMouseEnter={() => {
         setCursor("");
       }}

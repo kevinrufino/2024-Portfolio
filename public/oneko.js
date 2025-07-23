@@ -95,8 +95,9 @@
     nekoEl.style.right = `${nekoPosX - 16}px`;
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = 20;
+    nekoEl.style.mixBlendMode = "difference";
 
-    let nekoFile = "./oneko.png";
+    let nekoFile = "./oneko-white.png";
     const curScript = document.currentScript;
     if (curScript && curScript.dataset.cat) {
       nekoFile = curScript.dataset.cat;
