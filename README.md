@@ -1,70 +1,145 @@
-# Getting Started with Create React App
+# Kevin Rufino's Portfolio 2024
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, interactive portfolio website built with React 18, featuring dynamic animations, custom cursor effects, and responsive design. This repository is optimized for AI agent development and collaboration.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Interactive Loading Screen**: Progressive component loading with visual feedback
+- **Custom Cursor Effects**: Dynamic cursor that responds to different interactive elements
+- **Animated Hero Section**: Eye-catching hero with Matter.js physics and P5.js canvas
+- **Skills Marquee**: Continuous scrolling display of technical skills
+- **Project Showcase**: Interactive project cards with detailed information
+- **Responsive Design**: Fully responsive across all device sizes
+- **Smooth Animations**: React Spring animations throughout the application
+
+## 🛠️ Technology Stack
+
+- **Frontend**: React 18.3.1
+- **Styling**: Tailwind CSS 3.4.7
+- **Animations**: React Spring 9.7.5
+- **Physics**: Matter.js 0.20.0
+- **Canvas**: P5.js 1.11.0 with @p5-wrapper/react
+- **Typography**: Typewriter Effect 2.21.0
+- **Build Tool**: Create React App 5.0.1
+
+## 🤖 AI Agent Guidelines
+
+This repository is AI-native and agent-ready. When working with AI agents:
+
+### Agent Permissions
+
+- ✅ **Allowed**: Component creation/modification, styling updates, dependency management
+- ✅ **Allowed**: Documentation updates, test creation, performance optimizations
+- ❌ **Restricted**: Core architecture changes, dependency version downgrades, environment variable changes
+- ❌ **Restricted**: Deleting critical files, modifying build configuration without review
+
+### Agent Workflows
+
+- Use the predefined Windsurf workflows in `.windsurf/workflows/`
+- Follow the component naming conventions documented in `docs/component-standards.md`
+- Run `npm test` before submitting any changes
+- Use `npm run format` to ensure consistent code formatting
+
+### Code Quality Standards
+
+- All components must have JSDoc comments
+- Maintain 90%+ test coverage for new code
+- Follow ESLint rules (no warnings allowed)
+- Use TypeScript for new components when possible
+
+## 📦 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/kevinrufino/2024-Portfolio.git
+cd 2024-Portfolio
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+```
+
+## 🚀 Available Scripts
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the app in development mode on [http://localhost:3000](http://localhost:3000)
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm run format`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Formats code using Prettier
 
-### `npm run eject`
+## 🧪 Testing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This project uses Jest and React Testing Library. Test files should be co-located with components or in the `src/__tests__` directory.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# Run all tests
+npm test
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Run tests in watch mode
+npm test -- --watch
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Generate coverage report
+npm test -- --coverage
+```
 
-## Learn More
+## 📁 Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+├── components/          # Reusable React components
+│   ├── Hero/           # Hero section components
+│   ├── Intro/          # Introduction section
+│   └── Projects/       # Project showcase
+├── assets/             # Static assets (images, fonts)
+├── constants.js        # Application constants
+├── App.js             # Main application component
+└── index.js           # Application entry point
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🎨 Customization
 
-### Code Splitting
+### Colors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Primary**: `#F1F43B` (Yellow)
+- **Secondary**: `#3e3bf4` (Blue)
 
-### Analyzing the Bundle Size
+These colors are defined in `App.js` and can be easily customized.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Components
 
-### Making a Progressive Web App
+Each component is self-contained and can be modified independently. See the documentation in the `docs/` folder for detailed component guides.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🤝 Contributing
 
-### Advanced Configuration
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on contributing to this project, especially for AI agents.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📄 License
 
-### Deployment
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🌟 Deployment
 
-### `npm run build` fails to minify
+The application is optimized for deployment to platforms like:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Netlify
+- Vercel
+- GitHub Pages
+- AWS Amplify
+
+For deployment instructions, see the [deployment guide](docs/deployment.md).
+
+---
+
+**Built with ❤️ by Kevin Rufino**

@@ -1,82 +1,139 @@
-import "./App.css";
-import React, { useState, useEffect } from "react";
-import LoadingScreen from "./components/LoadingScreen.js";
-import { Footer } from "./components/Footer.js";
-import { Intro } from "./components/Intro/Intro.js";
-import { NavBar } from "./components/Nav.js";
-import { Projects } from "./components/Projects/Projects.js";
-import { SkillsMarquee } from "./components/Intro/SkillsMarquee.js";
-import Cursor from "./components/Cursor.js";
-// import { HeroCanvas } from "./components/Hero/HeroCanvas.js";
-import { Hero } from "./components/Hero/Hero.js";
+/**
+ * Refactored App component using new architecture
+ *
+ * Demonstrates the improved architecture with:
+ * - Context providers for global state
+ * - Custom hooks for better state management
+ * - Separated concerns and responsibilities
+ * - Better performance and maintainability
+ *
+ * @component
+ * @returns {JSX.Element} The rendered application
+ */
 
-function App() {
-  // List of main components to "load"
-  const componentsToLoad = [
-    "Cursor",
-    "NavBar",
-    "Hero",
-    "Intro",
-    "SkillsMarquee",
-    "Projects",
-    "Footer",
-  ];
-  const [progress, setProgress] = useState(0);
-  const total = componentsToLoad.length;
-  const [loading, setLoading] = useState(true);
+import React, { useEffect } from 'react';
+import AppProviders from './context/AppProviders.js';
+import { useCursor } from './context/CursorContext.js';
+import { useTheme } from './context/ThemeContext.js';
+import { useLoading } from './context/LoadingContext.js';
+import LoadingScreen from './components/LoadingScreen.js';
+import { Footer } from './components/Footer.js';
+import { Intro } from './components/Intro/Intro.js';
+import { NavBar } from './components/Nav.js';
+import { Projects } from './components/Projects/Projects.js';
+import { SkillsMarquee } from './components/Intro/SkillsMarquee.js';
+import Cursor from './components/Cursor.js';
+import { Hero } from './components/Hero/Hero.js';
+import { preloadImages } from './services/AssetService.js';
 
+/**
+ * Inner App component that uses context hooks
+ *
+ * This component uses the context hooks and is wrapped by AppProviders
+ */
+const AppContent = () => {
+  // Use context hooks instead of local state
+  const { setCursorType } = useCursor();
+  const { getThemeColors } = useTheme();
+  const { incrementProgress, getProgressPercentage, isComplete } = useLoading();
+
+  // Preload critical assets
   useEffect(() => {
-    // @TODO: check if all components are loaded
-    // Simulate loading each component one by one
-    if (progress < total) {
-      const timeout = setTimeout(() => setProgress((p) => p + 1), 350);
-      return () => clearTimeout(timeout);
-    } else {
-      const done = setTimeout(() => setLoading(false), 400);
-      return () => clearTimeout(done);
+    const criticalAssets = [
+      // Add critical image paths here
+    ];
+
+    if (criticalAssets.length > 0) {
+      preloadImages(criticalAssets);
     }
-  }, [progress, total]);
-  const [cursor, setCursor] = useState("");
-  const primaryColor = "#F1F43B";
-  const secondaryColor = "#3e3bf4";
-  if (loading) {
+  }, []);
+
+  // Handle loading progression
+  useEffect(() => {
+    const loadingInterval = setInterval(() => {
+      if (!isComplete()) {
+        incrementProgress();
+      } else {
+        clearInterval(loadingInterval);
+      }
+    }, 350);
+
+    return () => clearInterval(loadingInterval);
+  }, [incrementProgress, isComplete]);
+
+  // Handle cursor reset on app load
+  useEffect(() => {
+    setCursorType('');
+  }, [setCursorType]);
+
+  // Get theme colors
+  const themeColors = getThemeColors();
+
+  if (!isComplete()) {
     return (
       <LoadingScreen
-        progress={progress}
-        total={total}
-        primaryColor={primaryColor}
-        secondaryColor={secondaryColor}
-        setCursor={setCursor}
+        progress={getProgressPercentage()}
+        total={100}
+        secondaryColor={themeColors.secondary}
+        setCursor={setCursorType}
       />
     );
   }
+
   return (
     <div
-      className={
-        "bg-[#F1F43B] text-[#3e3bf4] scroll-smooth -z-2 relative overflow-hidden"
-      }
+      className={`bg-[${themeColors.primary}] text-[${themeColors.secondary}] scroll-smooth -z-2 relative overflow-hidden`}
     >
-      <p className="text-[#F1F43B]">
+      {/* Hidden easter egg text */}
+      <p className={`text-[${themeColors.primary}]`}>
         {`if you're reading this, you found a secret ;p`}
       </p>
-      <Cursor cursor={cursor} setCursor={setCursor} />
-      <NavBar setCursor={setCursor} />
-      {/* <HeroCanvas /> */}
+
+      {/* Global cursor component */}
+      <Cursor />
+
+      {/* Navigation header */}
+      <NavBar setCursor={setCursorType} />
+
+      {/* Hero section */}
       <Hero
-        primaryColor={primaryColor}
-        secondaryColor={secondaryColor}
-        setCursor={setCursor}
+        primaryColor={themeColors.primary}
+        secondaryColor={themeColors.secondary}
+        setCursor={setCursorType}
       />
+
+      {/* Introduction section */}
       <Intro
-        secondaryColor={secondaryColor}
-        cursor={cursor}
-        setCursor={setCursor}
+        secondaryColor={themeColors.secondary}
+        cursor={''}
+        setCursor={setCursorType}
       />
+
+      {/* Skills marquee */}
       <SkillsMarquee loop={0} />
-      <Projects cursor={cursor} setCursor={setCursor} />
-      <Footer cursor={cursor} setCursor={setCursor} />
+
+      {/* Projects showcase */}
+      <Projects cursor={''} setCursor={setCursorType} />
+
+      {/* Footer section */}
+      <Footer cursor={''} setCursor={setCursorType} />
     </div>
   );
-}
+};
 
-export default App;
+/**
+ * Refactored App component
+ *
+ * Uses context providers instead of prop drilling
+ * Implements proper separation of concerns
+ * Better performance with optimized re-renders
+ */
+const AppRefactored = () => {
+  return (
+    <AppProviders>
+      <AppContent />
+    </AppProviders>
+  );
+};
+
+export default AppRefactored;

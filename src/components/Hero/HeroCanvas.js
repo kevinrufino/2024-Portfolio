@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 import {
   Engine,
   Render,
@@ -7,7 +7,7 @@ import {
   Composite,
   Mouse,
   MouseConstraint,
-} from "matter-js";
+} from 'matter-js';
 
 // @TODO: FIX shape of bodies
 // @TODO: Initial placement of bodies in hero section
@@ -36,7 +36,7 @@ export function HeroCanvas() {
         width: cw,
         height: ch,
         wireframes: true,
-        background: "#000000",
+        background: '#000000',
       },
     });
 
@@ -58,7 +58,7 @@ export function HeroCanvas() {
 
     Composite.add(world, mouseConstraint);
 
-    console.log("render", render);
+    console.log('render', render);
 
     Composite.add(world, [
       // Bodies.rectangle(cw / 2, ih, cw, 1, { isStatic: true }),
@@ -68,17 +68,17 @@ export function HeroCanvas() {
       Bodies.rectangle(200, ih, 700, 20, {
         isStatic: true,
         angle: Math.PI * 0.06,
-        render: { fillStyle: "white" },
+        render: { fillStyle: 'white' },
       }),
       Bodies.rectangle(500, ih * 2, 700, 20, {
         isStatic: true,
         angle: -Math.PI * 0.06,
-        render: { fillStyle: "white" },
+        render: { fillStyle: 'white' },
       }),
       Bodies.rectangle(340, ih * 3, 700, 20, {
         isStatic: true,
         angle: Math.PI * 0.04,
-        render: { fillStyle: "white" },
+        render: { fillStyle: 'white' },
       }),
     ]);
 
@@ -104,16 +104,16 @@ export function HeroCanvas() {
   //   isPressed.current = false;
   // };
 
-  const handleAddCircle = (e) => {
+  const handleAddCircle = e => {
     // if (isPressed.current) {
     const ball = Bodies.circle(e.clientX, e.clientY, 30, {
       mass: 0.01,
       restitution: 0.6,
       friction: 0.00001,
       render: {
-        fillStyle: "white",
+        fillStyle: 'white',
         sprite: {
-          texture: "./rufino.png",
+          texture: './rufino.png',
           xScale: 0.1,
           yScale: 0.1,
         },
@@ -128,14 +128,14 @@ export function HeroCanvas() {
     <div
       ref={elementRef}
       style={{
-        position: "fixed",
+        position: 'fixed',
         top: 0,
         left: 0,
-        width: "100vw",
-        height: "100vh",
+        width: '100vw',
+        height: '100vh',
         zIndex: -1,
-        pointerEvents: "auto",
-        mixBlendMode: "difference",
+        pointerEvents: 'auto',
+        mixBlendMode: 'difference',
       }}
       onClick={handleAddCircle}
     />
