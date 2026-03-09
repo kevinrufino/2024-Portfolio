@@ -1,4 +1,29 @@
+import { useRef, useEffect } from 'react';
+
 export const Footer = ({ setCursor }) => {
+  const obstacleRef = useRef(null);
+
+  useEffect(() => {
+    const dispatch = () => {
+      if (!obstacleRef.current) return;
+      const rect = obstacleRef.current.getBoundingClientRect();
+      window.dispatchEvent(
+        new CustomEvent('registerObstacle', {
+          detail: {
+            id: 'footer-contact',
+            x: rect.left + rect.width / 2,
+            y: rect.top + window.scrollY + rect.height / 2,
+            width: rect.width,
+            height: rect.height,
+          },
+        }),
+      );
+    };
+    requestAnimationFrame(dispatch);
+    window.addEventListener('resize', dispatch);
+    return () => window.removeEventListener('resize', dispatch);
+  }, []);
+
   return (
     <footer
       className='max-w-4xl m-auto flex flex-col'
@@ -12,7 +37,10 @@ export const Footer = ({ setCursor }) => {
           <p className='text-2xl md:text-5xl m-2'>{'Lets Connect'}</p>
           <img src='/smile.svg' alt='smile' className='p-2' />
         </div>
-        <div className='flex flex-col md:flex-row md:text-3xl m-4'>
+        <div
+          className='flex flex-col md:flex-row md:text-3xl m-4 w-max'
+          ref={obstacleRef}
+        >
           <img
             src='/pixel-selfie.png'
             alt="it's a me"

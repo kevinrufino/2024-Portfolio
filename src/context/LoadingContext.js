@@ -21,6 +21,7 @@ export const LOADING_ACTIONS = {
   INCREMENT_PROGRESS: 'INCREMENT_PROGRESS',
   SET_LOADING_STATE: 'SET_LOADING_STATE',
   RESET_LOADING: 'RESET_LOADING',
+  SET_LOADING_COMPLETE: 'SET_LOADING_COMPLETE',
 };
 
 // Initial loading state
@@ -29,6 +30,7 @@ const initialState = {
   total: 7, // Total number of components to load
   isLoading: true,
   loadedComponents: [],
+  loadingComplete: false,
 };
 
 // Reducer for loading state management
@@ -52,6 +54,11 @@ const loadingReducer = (state, action) => {
     case LOADING_ACTIONS.RESET_LOADING:
       return {
         ...initialState,
+      };
+    case LOADING_ACTIONS.SET_LOADING_COMPLETE:
+      return {
+        ...state,
+        loadingComplete: true,
       };
     default:
       return state;
@@ -82,13 +89,17 @@ export const LoadingProvider = ({ children }) => {
     dispatch({ type: LOADING_ACTIONS.RESET_LOADING });
   }, []);
 
+  const setLoadingComplete = useCallback(() => {
+    dispatch({ type: LOADING_ACTIONS.SET_LOADING_COMPLETE });
+  }, []);
+
   const getProgressPercentage = useCallback(() => {
     return Math.round((state.progress / state.total) * 100);
   }, [state.progress, state.total]);
 
   const isComplete = useCallback(() => {
-    return state.progress >= state.total;
-  }, [state.progress, state.total]);
+    return state.progress >= state.total && state.loadingComplete;
+  }, [state.progress, state.total, state.loadingComplete]);
 
   const value = {
     ...state,
@@ -96,6 +107,7 @@ export const LoadingProvider = ({ children }) => {
     incrementProgress,
     setLoadingState,
     resetLoading,
+    setLoadingComplete,
     getProgressPercentage,
     isComplete,
   };

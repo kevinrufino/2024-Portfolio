@@ -11,7 +11,7 @@
  * @returns {JSX.Element} The rendered application
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import AppProviders from './context/AppProviders.js';
 import { useCursor } from './context/CursorContext.js';
 import { useTheme } from './context/ThemeContext.js';
@@ -25,7 +25,11 @@ import { SkillsMarquee } from './components/Intro/SkillsMarquee.js';
 import Cursor from './components/Cursor.js';
 import { Hero } from './components/Hero/Hero.js';
 import { preloadImages } from './services/AssetService.js';
-import MikaShaderEffect from './components/ShaderBackground/index.js';
+import MatterJSCanvas from './components/Hero/MatterJSCanvas.js';
+
+const MikaShaderEffect = React.lazy(
+  () => import('./components/ShaderBackground/index.js'),
+);
 
 /**
  * Inner App component that uses context hooks
@@ -36,7 +40,8 @@ const AppContent = () => {
   // Use context hooks instead of local state
   const { setCursorType, type: cursorType } = useCursor();
   const { getThemeColors } = useTheme();
-  const { incrementProgress, getProgressPercentage, isComplete } = useLoading();
+  const { setProgress, getProgressPercentage, isComplete, setLoadingComplete } =
+    useLoading();
 
   // Preload critical assets
   useEffect(() => {
@@ -49,18 +54,19 @@ const AppContent = () => {
     }
   }, []);
 
-  // Handle loading progression
+  // Complete loading when fonts are ready, with a 600ms minimum for the animation
   useEffect(() => {
-    const loadingInterval = setInterval(() => {
-      if (!isComplete()) {
-        incrementProgress();
-      } else {
-        clearInterval(loadingInterval);
-      }
-    }, 350);
-
-    return () => clearInterval(loadingInterval);
-  }, [incrementProgress, isComplete]);
+    const MIN_MS = 600;
+    const start = Date.now();
+    document.fonts.ready.then(() => {
+      const elapsed = Date.now() - start;
+      const remaining = Math.max(0, MIN_MS - elapsed);
+      setTimeout(() => {
+        setProgress(7);
+        setTimeout(() => setLoadingComplete(), 300);
+      }, remaining);
+    });
+  }, [setProgress, setLoadingComplete]);
 
   // Handle cursor reset on app load
   useEffect(() => {
@@ -70,59 +76,65 @@ const AppContent = () => {
   // Get theme colors
   const themeColors = getThemeColors();
 
-  if (!isComplete()) {
-    return (
-      <LoadingScreen
-        progress={getProgressPercentage()}
-        total={100}
-        secondaryColor={themeColors.secondary}
-        setCursor={setCursorType}
-      />
-    );
-  }
-
   return (
-    <div
-      className={`text-[${themeColors.secondary}] scroll-smooth relative overflow-hidden`}
-      style={{ zIndex: 1 }}
-    >
-      {/* Shader Background */}
-      <MikaShaderEffect />
+    <>
+      {/* Shader Background — fixed, z:-1, lazy-loaded to keep Three.js off the critical path */}
+      <Suspense fallback={null}>
+        <MikaShaderEffect />
+      </Suspense>
 
-      {/* Hidden easter egg text */}
-      <p style={{ color: themeColors.primary }}>
-        {`if you're reading this, you found a secret ;p`}
-      </p>
+      {/* Matter.js physics canvas — z:0, between shader and content */}
+      <MatterJSCanvas />
 
-      {/* Global cursor component */}
-      <Cursor cursor={cursorType} />
+      {/* Page content — z:2, on top */}
+      <div
+        className={`text-[${themeColors.secondary}] scroll-smooth relative overflow-hidden`}
+        style={{ position: 'relative' }}
+      >
+        {/* Hidden easter egg text */}
+        <p style={{ color: themeColors.primary }}>
+          {`if you're reading this, you found a secret ;p`}
+        </p>
 
-      {/* Navigation header */}
-      <NavBar setCursor={setCursorType} />
+        {/* Global cursor component */}
+        <Cursor cursor={cursorType} />
 
-      {/* Hero section */}
-      <Hero
-        primaryColor={themeColors.primary}
-        secondaryColor={themeColors.secondary}
-        setCursor={setCursorType}
-      />
+        {/* Navigation header */}
+        <NavBar setCursor={setCursorType} />
 
-      {/* Introduction section */}
-      <Intro
-        secondaryColor={themeColors.secondary}
-        cursor={''}
-        setCursor={setCursorType}
-      />
+        {!isComplete() && (
+          <LoadingScreen
+            progress={getProgressPercentage()}
+            total={100}
+            secondaryColor={themeColors.secondary}
+            setCursor={setCursorType}
+          />
+        )}
 
-      {/* Skills marquee */}
-      <SkillsMarquee loop={0} />
+        {/* Hero section */}
+        <Hero
+          primaryColor={themeColors.primary}
+          secondaryColor={themeColors.secondary}
+          setCursor={setCursorType}
+        />
 
-      {/* Projects showcase */}
-      <Projects cursor={''} setCursor={setCursorType} />
+        {/* Introduction section */}
+        <Intro
+          secondaryColor={themeColors.secondary}
+          cursor={''}
+          setCursor={setCursorType}
+        />
 
-      {/* Footer section */}
-      <Footer cursor={''} setCursor={setCursorType} />
-    </div>
+        {/* Skills marquee */}
+        <SkillsMarquee loop={0} />
+
+        {/* Projects showcase */}
+        <Projects cursor={''} setCursor={setCursorType} />
+
+        {/* Footer section */}
+        <Footer cursor={''} setCursor={setCursorType} />
+      </div>
+    </>
   );
 };
 

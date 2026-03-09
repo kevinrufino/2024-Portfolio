@@ -17,7 +17,7 @@
  */
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { HeroName } from './Hero/HeroName.js';
+import { HeroName } from './Hero/components/HeroName.js';
 
 const LoadingScreen = ({ progress, total, secondaryColor, setCursor }) => {
   /** @type {React.RefObject<HTMLDivElement>} Reference to the hero name container */

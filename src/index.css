@@ -5,31 +5,37 @@
 @font-face {
   font-family: "OffBit-101";
   src: url("../public/fonts/OffBit-101.otf") format("opentype");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "OffBit-101-Bold";
   src: url("../public/fonts/OffBit-101Bold.otf") format("openType");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "OffBit-Regular";
   src: url("../public/fonts/OffBit-Regular.otf") format("openType");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "OffBit-Bold";
   src: url("../public/fonts/OffBit-Bold.otf") format("openType");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "OffBit-Dot";
   src: url("../public/fonts/OffBit-Dot.otf") format("openType");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Plumpelo";
   src: url("../public/fonts/Plumpelo-Pixelated-2.otf") format("openType");
+  font-display: swap;
 }
 
 :root {
