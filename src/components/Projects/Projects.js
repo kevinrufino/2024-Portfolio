@@ -1,9 +1,7 @@
 import { ProjectsData } from '../../constants.js';
 import { ProjectVideo } from './ProjectVideo.js';
 import { ProjectInfo } from './ProjectInfo.js';
-import React from 'react';
 
-// eslint-disable-next-line react/prop-types
 export const Projects = ({ setCursor }) => {
   return (
     <div className='w-full my-4' id='projects'>

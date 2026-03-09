@@ -1,6 +1,3 @@
-import React from 'react';
-
-// eslint-disable-next-line react/prop-types
 export const Footer = ({ setCursor }) => {
   return (
     <footer

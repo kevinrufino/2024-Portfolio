@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
-
 export const HeroFillName = props => {
   return (
     <svg

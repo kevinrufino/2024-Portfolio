@@ -25,6 +25,7 @@ import { SkillsMarquee } from './components/Intro/SkillsMarquee.js';
 import Cursor from './components/Cursor.js';
 import { Hero } from './components/Hero/Hero.js';
 import { preloadImages } from './services/AssetService.js';
+import MikaShaderEffect from './components/ShaderBackground/index.js';
 
 /**
  * Inner App component that uses context hooks
@@ -33,7 +34,7 @@ import { preloadImages } from './services/AssetService.js';
  */
 const AppContent = () => {
   // Use context hooks instead of local state
-  const { setCursorType } = useCursor();
+  const { setCursorType, type: cursorType } = useCursor();
   const { getThemeColors } = useTheme();
   const { incrementProgress, getProgressPercentage, isComplete } = useLoading();
 
@@ -82,15 +83,19 @@ const AppContent = () => {
 
   return (
     <div
-      className={`bg-[${themeColors.primary}] text-[${themeColors.secondary}] scroll-smooth -z-2 relative overflow-hidden`}
+      className={`text-[${themeColors.secondary}] scroll-smooth relative overflow-hidden`}
+      style={{ zIndex: 1 }}
     >
+      {/* Shader Background */}
+      <MikaShaderEffect />
+
       {/* Hidden easter egg text */}
-      <p className={`text-[${themeColors.primary}]`}>
+      <p style={{ color: themeColors.primary }}>
         {`if you're reading this, you found a secret ;p`}
       </p>
 
       {/* Global cursor component */}
-      <Cursor />
+      <Cursor cursor={cursorType} />
 
       {/* Navigation header */}
       <NavBar setCursor={setCursorType} />
