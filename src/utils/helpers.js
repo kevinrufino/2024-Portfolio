@@ -94,6 +94,14 @@ export const formatBytes = (bytes) => {
 };
 
 /**
+ * Convert a string to a URL-friendly slug
+ * @param {string} str - String to slugify
+ * @returns {string} Slugified string
+ */
+export const toSlug = (str) =>
+  str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+/**
  * Generate unique ID for components
  * @param {string} prefix - ID prefix
  * @returns {string} Unique ID

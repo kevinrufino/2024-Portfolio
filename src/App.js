@@ -12,6 +12,7 @@
  */
 
 import React, { useEffect, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AppProviders from './context/AppProviders.js';
 import { useCursor } from './context/CursorContext.js';
 import { useTheme } from './context/ThemeContext.js';
@@ -26,6 +27,7 @@ import Cursor from './components/Cursor.js';
 import { Hero } from './components/Hero/Hero.js';
 import { preloadImages } from './services/AssetService.js';
 import MatterJSCanvas from './components/Hero/MatterJSCanvas.js';
+import ProjectPage from './pages/ProjectPage.js';
 
 const MikaShaderEffect = React.lazy(
   () => import('./components/ShaderBackground/index.js'),
@@ -88,7 +90,7 @@ const AppContent = () => {
 
       {/* Page content — z:2, on top */}
       <div
-        className={`text-[${themeColors.secondary}] scroll-smooth relative overflow-hidden`}
+        className="text-ultra scroll-smooth relative overflow-hidden grain"
         style={{ position: 'relative' }}
       >
         {/* Hidden easter egg text */}
@@ -147,9 +149,14 @@ const AppContent = () => {
  */
 const AppRefactored = () => {
   return (
-    <AppProviders>
-      <AppContent />
-    </AppProviders>
+    <BrowserRouter>
+      <AppProviders>
+        <Routes>
+          <Route path="/" element={<AppContent />} />
+          <Route path="/projects/:slug" element={<ProjectPage />} />
+        </Routes>
+      </AppProviders>
+    </BrowserRouter>
   );
 };
 

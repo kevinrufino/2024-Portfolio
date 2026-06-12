@@ -1,26 +1,38 @@
 import PropTypes from 'prop-types';
 
+const NAV_LINKS = [
+  { label: 'Home', href: '/#home' },
+  { label: 'Intro', href: '/#intro' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Contact', href: '/#contact' },
+];
+
 export const NavBar = ({ setCursor }) => {
   return (
-    <div
-      className='mix-blend-difference flex flex-col fixed top-2 font-offbit101Bold text-white text-4xl z-10'
+    <nav
+      className="mix-blend-difference fixed top-2 left-2 md:top-3 md:left-3 text-white z-10"
       onMouseEnter={() => {
         setCursor('');
       }}
     >
-      <a href='#home' className='mx-2 hover:underline'>
-        {'Home'}
-      </a>
-      <a href='#intro' className='mx-2 hover:underline'>
-        {'Intro'}
-      </a>
-      <a href='#projects' className='mx-2 hover:underline'>
-        {'Projects'}
-      </a>
-      <a href='#contact' className='mx-2 hover:underline'>
-        {'Contact'}
-      </a>
-    </div>
+      <ul className="flex flex-row md:flex-col flex-wrap gap-x-4 gap-y-1 font-offbit101Bold text-xl md:text-3xl lg:text-4xl">
+        {NAV_LINKS.map((link, i) => (
+          <li key={link.label}>
+            <a
+              href={link.href}
+              className="group flex items-baseline gap-1.5 px-1"
+            >
+              <span className="font-offbitDot text-[9px] md:text-xs tracking-widest opacity-60">
+                0{i + 1}
+              </span>
+              <span className="group-hover:underline underline-offset-4 decoration-2">
+                {link.label}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 
