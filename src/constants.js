@@ -5,6 +5,7 @@ import spinning404Asset from "./assets/404spinning-asset.gif";
 import dogewoodAsset from "./assets/dogewood-gif.gif";
 import battlebotAsset from "./assets/battlebot_run.gif";
 import miceAsset from "./assets/mice-gif.gif";
+import moodieAsset from "./assets/moodie-screenshot.png";
 
 // Project Links
 export const MCFrontEndLink =
@@ -30,6 +31,8 @@ export const OurForce1CDPLink = "https://www.swoosh.nike/collections/our-force-1
 export const EAFCPartnerPageLink = "https://www.swoosh.nike/p/ea-sports-fc";
 
 export const TINAJCLPLink = "https://www.swoosh.nike/collections/our-force-1-tinaj/products/air-force-1-tinaj/tokens/301?tab=story";
+
+export const MoodieLink = "https://moo-die-bice.vercel.app/";
 
 // Project Scrape Gifs
 
@@ -59,6 +62,62 @@ export const ProjectsData = [
     }],
     scrapeGif: MaxsLabScrapeGif,
     assets: [maxsLabAsset],
+  },
+  {
+    title: "Moodie",
+    year: "2026",
+    role: "Creator",
+    type: "Infinite Canvas",
+    client: "Passion Project",
+    technology: ["Next.js", "React", "TypeScript", "Zustand"],
+    description: "An infinite 2D discovery canvas of Pinterest-style mood pins. Users can pan and zoom through an endless world with only the pins in view being rendered in the DOM. Built with a transform-based camera, lazy procedural spatial index, viewport culling, and full SSR/SEO support. The architecture uses a single transformed layer for GPU-accelerated panning with zero React renders, and pins only re-render when the visible set changes.",
+    links: [{
+      "Check out Moodie!": MoodieLink
+    }],
+    liveLink: MoodieLink,
+    scrapeGif: {
+    title: "Minecraft Clone",
+    year: "2022",
+    role: "Creator",
+    type: "Multiplayer WebGL Game",
+    client: "Passion Project",
+    technology: ["React", "Three.js", "Web Sockets", "Procedural Generation", "Physics Simulation"],
+    description:
+      "Developed and collaborated on a 3D WebGL clone of Minecraft with online functionalities. The online functionality uses web sockets to send and retrieve updates utilizing Socket.IO. Being built entirely in R3F, this is proudly the most in depth React Minecraft clone. The game generates a randomized voxel terrain of the world using an algorithm to create a graph of all the block data. The block data is used to construct a 3D geometry of the environment which the player can interact with using a custom physics engine. This terrain generation can support multiple parameters such as environment types. This started as a passion project to learn how a game like Minecraft can create its limitless world.",
+    links: [
+      {
+        "Try it on your machine!": MCFrontEndLink,
+      },
+      {
+        "Boot up a server, play with friends!": MCServerLink
+      }
+    ],
+    liveLink: MCLiveLink,
+    scrapeGif: MCScrapeGif,
+    assets: [mcBlockAsset],
+  },
+    assets: [moodieAsset],
+  },
+  {
+    title: "Minecraft Clone",
+    year: "2022",
+    role: "Creator",
+    type: "Multiplayer WebGL Game",
+    client: "Passion Project",
+    technology: ["React", "Three.js", "Web Sockets", "Procedural Generation", "Physics Simulation"],
+    description:
+      "Developed and collaborated on a 3D WebGL clone of Minecraft with online functionalities. The online functionality uses web sockets to send and retrieve updates utilizing Socket.IO. Being built entirely in R3F, this is proudly the most in depth React Minecraft clone. The game generates a randomized voxel terrain of the world using an algorithm to create a graph of all the block data. The block data is used to construct a 3D geometry of the environment which the player can interact with using a custom physics engine. This terrain generation can support multiple parameters such as environment types. This started as a passion project to learn how a game like Minecraft can create its limitless world.",
+    links: [
+      {
+        "Try it on your machine!": MCFrontEndLink,
+      },
+      {
+        "Boot up a server, play with friends!": MCServerLink
+      }
+    ],
+    liveLink: MCLiveLink,
+    scrapeGif: MCScrapeGif,
+    assets: [mcBlockAsset],
   },
   {
     title: "Our Force 1 Poster Content Display Page",
@@ -103,27 +162,6 @@ export const ProjectsData = [
     }],
     scrapeGif: EAFCPartnerPageGif,
     assets: [],
-  },
-  {
-    title: "Minecraft Clone",
-    year: "2022",
-    role: "Creator",
-    type: "Multiplayer WebGL Game",
-    client: "Passion Project",
-    technology: ["React", "Three.js", "Web Sockets", "Procedural Generation", "Physics Simulation"],
-    description:
-      "Developed and collaborated on a 3D WebGL clone of Minecraft with online functionalities. The online functionality uses web sockets to send and retrieve updates utilizing Socket.IO. Being built entirely in R3F, this is proudly the most in depth React Minecraft clone. The game generates a randomized voxel terrain of the world using an algorithm to create a graph of all the block data. The block data is used to construct a 3D geometry of the environment which the player can interact with using a custom physics engine. This terrain generation can support multiple parameters such as environment types. This started as a passion project to learn how a game like Minecraft can create its limitless world.",
-    links: [
-      {
-        "Try it on your machine!": MCFrontEndLink,
-      },
-      {
-        "Boot up a server, play with friends!": MCServerLink
-      }
-    ],
-    liveLink: MCLiveLink,
-    scrapeGif: MCScrapeGif,
-    assets: [mcBlockAsset],
   },
   {
     title: "TINAJ Collection Listing Page",
