@@ -11,6 +11,8 @@ export const MCFrontEndLink =
   "https://github.com/kevinrufino/minecraft-clone-react";
 export const MCServerLink =
   "https://github.com/GreyDaCaLa/ReactMineCraftCloneServer";
+export const MCLiveLink =
+  "https://minecraft-clone-react-chi.vercel.app/";
 
 export const MaxsLabLink = "https://www.swoosh.nike/m/maxs-lab";
 
@@ -119,6 +121,7 @@ export const ProjectsData = [
         "Boot up a server, play with friends!": MCServerLink
       }
     ],
+    liveLink: MCLiveLink,
     scrapeGif: MCScrapeGif,
     assets: [mcBlockAsset],
   },
