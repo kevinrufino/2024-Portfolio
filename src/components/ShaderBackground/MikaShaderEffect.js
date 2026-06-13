@@ -281,6 +281,10 @@ function Scene({ isMobile }) {
     const s = stateRef.current;
     if (!s) return;
 
+    // Skip all per-frame work while the tab is hidden — no point painting the
+    // control map or re-uploading the texture when nothing is visible.
+    if (document.hidden) return;
+
     const clampedDt = Math.max(Math.min(dt, 1 / 30), 1 / 120);
     const t = performance.now() * 0.001;
 
@@ -379,6 +383,7 @@ function Scene({ isMobile }) {
 // ─────────────────────────────────────────────
 export default function MikaShaderEffect({ style = {} }) {
   const [isMobile, setIsMobile] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -394,6 +399,21 @@ export default function MikaShaderEffect({ style = {} }) {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Honour the OS "reduce motion" setting — render a static frame instead of
+  // running the continuous animation loop.
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReducedMotion(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  // Cap DPR: the effect is deliberately low-fi/pixelated, so a 1.5x ceiling on
+  // desktop roughly halves the per-frame canvas paint + texture-upload cost
+  // versus a full 2x retina buffer, with no meaningful visual loss.
+  const dprCap = isMobile ? 1 : 1.5;
 
   return (
     <div
@@ -415,8 +435,8 @@ export default function MikaShaderEffect({ style = {} }) {
         }}
         style={{ display: 'block', width: '100%', height: '100%' }}
         camera={{ position: [0, 0, 10] }}
-        dpr={Math.min(window.devicePixelRatio, isMobile ? 1 : 2)}
-        frameloop={isMobile ? 'demand' : 'always'}
+        dpr={Math.min(window.devicePixelRatio, dprCap)}
+        frameloop={isMobile || reducedMotion ? 'demand' : 'always'}
       >
         {/* <color attach='background' args={['#F1F43B']} /> */}
         <Scene isMobile={isMobile} />

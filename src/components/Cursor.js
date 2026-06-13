@@ -2,110 +2,116 @@
 /**
  * Custom cursor component with animated effects and project-specific cursors
  *
- * This component creates a custom cursor that:
- * - Follows mouse movement with smooth animations
- * - Changes appearance based on hover context
- * - Displays different animated cursors for different projects
- * - Provides visual feedback for interactive elements
+ * Follows the mouse with a smooth trailing motion and swaps to a
+ * project-specific animated cursor on hover.
+ *
+ * Performance: pointer tracking writes to refs and the position is applied
+ * via a requestAnimationFrame lerp directly on the element's transform — so
+ * moving the mouse never triggers a React re-render. The rAF loop only runs
+ * while a project cursor is actually active; otherwise the component renders
+ * nothing and does no per-frame work.
  *
  * @component
  * @param {Object} props - Component props
  * @param {string} props.cursor - Current cursor state/type
- * @returns {JSX.Element} The custom cursor component
+ * @returns {JSX.Element|null} The custom cursor element, or null when inactive
  */
-import React, { useState, useEffect } from 'react';
-import { useSpring, animated } from 'react-spring';
+import React, { useRef, useEffect } from 'react';
 import spinningShoe from '../assets/404spinning-asset.gif';
 import bot from '../assets/battlebot_run.gif';
 import doge from '../assets/dogewood-gif.gif';
 import mc from '../assets/mc-spinning-block.gif';
 import mice from '../assets/mice-gif.gif';
-// import maxsLab from '../assets/maxs-lab-gif.gif';
+
+/** Map of cursor state → { img, style } for project-specific cursors */
+const CURSORS = {
+  "Max's Lab": {
+    img: spinningShoe,
+    style: { filter: 'brightness(1.2) hue-rotate(40deg)' },
+  },
+  'Minecraft Clone': { img: mc },
+  '.Swoosh 404': { img: spinningShoe },
+  'Defenders of Dogewood': { img: doge },
+  Anonymice: { img: mice },
+  'SNK-Y Bot': { img: bot },
+  'EA Sports FC Partner Page': {
+    img: spinningShoe,
+    style: { filter: 'brightness(1.2) hue-rotate(300deg)' },
+  },
+  'TINAJ Collection Listing Page': {
+    img: spinningShoe,
+    style: { filter: 'brightness(1.2) hue-rotate(150deg) grayscale(1)' },
+  },
+  'Our Force 1 Poster Content Display Page': {
+    img: spinningShoe,
+    style: { filter: 'brightness(1.2) hue-rotate(250deg)' },
+  },
+};
 
 const Cursor = ({ cursor }) => {
-  /** @type {{x: number, y: number}} Current mouse position coordinates */
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const elRef = useRef(null);
+  const target = useRef({ x: 0, y: 0 });
+  const pos = useRef({ x: 0, y: 0 });
+  const rafRef = useRef(0);
 
-  /** @type {string} Cursor image source based on current cursor state */
-  let cursorImg;
+  const active = CURSORS[cursor];
 
-  /** @type {Object} CSS filters/styles for cursor appearance */
-  let cursorColor;
-  switch (cursor) {
-    case "Max's Lab":
-      cursorImg = spinningShoe;
-      cursorColor = { filter: 'brightness(1.2) hue-rotate(40deg)' };
-      break;
-    case 'Minecraft Clone':
-      cursorImg = mc;
-      break;
-    case '.Swoosh 404':
-      cursorImg = spinningShoe;
-      break;
-    case 'Defenders of Dogewood':
-      cursorImg = doge;
-      break;
-    case 'Anonymice':
-      cursorImg = mice;
-      break;
-    case 'SNK-Y Bot':
-      cursorImg = bot;
-      break;
-    case 'EA Sports FC Partner Page':
-      cursorImg = spinningShoe;
-      cursorColor = { filter: 'brightness(1.2) hue-rotate(300deg)' };
-      break;
-    case 'TINAJ Collection Listing Page':
-      cursorImg = spinningShoe;
-      cursorColor = {
-        filter: 'brightness(1.2) hue-rotate(150deg) grayscale(1)',
-      };
-      break;
-    case 'Our Force 1 Poster Content Display Page':
-      cursorImg = spinningShoe;
-      cursorColor = { filter: 'brightness(1.2) hue-rotate(250deg)' };
-      break;
-    default:
-      cursorImg = '';
-  }
-
-  const animatedStyles = useSpring({
-    to: { x: mousePosition.x, y: mousePosition.y },
-    config: { mass: 1, tension: 280, friction: 40 },
-  });
-
+  // Track the pointer in a ref — no state, so no re-render on every move.
   useEffect(() => {
-    const handleMouseMove = e => {
-      setMousePosition({ x: e.pageX, y: e.pageY });
+    const onMove = e => {
+      target.current.x = e.pageX;
+      target.current.y = e.pageY;
     };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
   }, []);
 
+  // Smooth trailing follow via rAF lerp. Only runs while a cursor is active.
+  useEffect(() => {
+    if (!active) return undefined;
+
+    // Snap to the live pointer on activation so it doesn't fly in from (0,0).
+    pos.current.x = target.current.x;
+    pos.current.y = target.current.y;
+
+    const tick = () => {
+      pos.current.x += (target.current.x - pos.current.x) * 0.18;
+      pos.current.y += (target.current.y - pos.current.y) * 0.18;
+      const el = elRef.current;
+      if (el) {
+        el.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0)`;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [active]);
+
+  if (!active) return null;
+
   return (
-    cursorImg && (
-      <animated.div
-        style={{
-          position: 'absolute',
-          width: 150,
-          height: 150,
-          overflow: 'hidden',
-          zIndex: 9999,
-          ...animatedStyles,
-          ...cursorColor,
-        }}
-      >
-        <img
-          src={cursorImg}
-          className='h-full w-full object-cover overflow-hidden'
-          alt='hello'
-        />
-      </animated.div>
-    )
+    <div
+      ref={elRef}
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: 150,
+        height: 150,
+        overflow: 'hidden',
+        zIndex: 9999,
+        pointerEvents: 'none',
+        willChange: 'transform',
+        ...active.style,
+      }}
+    >
+      <img
+        src={active.img}
+        className='h-full w-full object-cover overflow-hidden'
+        alt=''
+      />
+    </div>
   );
 };
 

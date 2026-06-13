@@ -1,6 +1,15 @@
 import { useRef, useEffect } from 'react';
 import Matter from 'matter-js';
 
+/**
+ * Full-page physics playground for the clickable hero name sprites.
+ *
+ * Performance: the engine, renderer and runner stay completely idle until the
+ * first sprite is spawned (a name is clicked). Most visitors never click, so
+ * the per-frame clear/redraw of the large full-document canvas — and the
+ * canvas backing-store allocation itself — are deferred until they're actually
+ * needed. The simulation is also paused whenever the tab is hidden.
+ */
 const MatterJSCanvas = () => {
   const canvasRef = useRef(null);
   const spriteMapRef = useRef(new Map()); // bodyId → { img, width, height }
@@ -11,7 +20,13 @@ const MatterJSCanvas = () => {
     const world = engine.world;
 
     const canvas = canvasRef.current;
-    const updateCanvasSize = () => {
+    const staticOpts = {
+      isStatic: true,
+      restitution: 0,
+      render: { fillStyle: 'transparent', strokeStyle: 'transparent' },
+    };
+
+    const sizeCanvasToDocument = () => {
       canvas.width = window.innerWidth;
       canvas.height = document.body.scrollHeight;
       // Keep CSS dimensions in sync with pixel dimensions so there is no
@@ -19,27 +34,46 @@ const MatterJSCanvas = () => {
       canvas.style.width = `${canvas.width}px`;
       canvas.style.height = `${canvas.height}px`;
     };
-    updateCanvasSize();
 
-    const W = canvas.width;
-    const H = canvas.height;
-    const T = 30; // wall thickness
-    const staticOpts = {
-      isStatic: true,
-      restitution: 0,
-      render: { fillStyle: 'transparent', strokeStyle: 'transparent' },
+    const render = Matter.Render.create({
+      canvas,
+      engine,
+      options: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        wireframes: false,
+        background: 'transparent',
+      },
+    });
+    const runner = Matter.Runner.create();
+
+    // ── Lazy start: nothing runs until the first sprite is spawned ──────────
+    let started = false;
+    const ensureStarted = () => {
+      if (started) return;
+      started = true;
+
+      // Allocate the full-document canvas only now that we actually render.
+      sizeCanvasToDocument();
+      render.options.width = canvas.width;
+      render.options.height = canvas.height;
+
+      // Narrow platform just below the hero fold for interesting stacking.
+      const heroPlatform = Matter.Bodies.rectangle(
+        canvas.width * 0.44,
+        window.innerHeight + 30,
+        canvas.width * 0.05,
+        20,
+        staticOpts,
+      );
+      Matter.World.add(world, [heroPlatform]);
+
+      Matter.Render.run(render);
+      Matter.Runner.run(runner, engine);
     };
-    // Narrow platform just below the hero fold to create interesting stacking
-    const heroPlatform = Matter.Bodies.rectangle(
-      W * 0.44,
-      window.innerHeight + 30,
-      W * 0.05,
-      20,
-      staticOpts,
-    );
-    Matter.World.add(world, [heroPlatform]);
 
     const spawnWithImage = (img, x, y, w, h) => {
+      ensureStarted();
       const body = Matter.Bodies.rectangle(x, y, w, h, {
         restitution: 0,
         friction: 0.5,
@@ -56,9 +90,6 @@ const MatterJSCanvas = () => {
         y: 0,
       });
       spriteMapRef.current.set(body.id, { img, width: w, height: h });
-      console.log(
-        `[MatterJSCanvas] sprite ready (body ${body.id}, ${Math.round(w)}×${Math.round(h)}px)`,
-      );
     };
 
     const handleSpawn = e => {
@@ -101,7 +132,8 @@ const MatterJSCanvas = () => {
     };
     window.addEventListener('spawnBox', handleSpawn);
 
-    // Registers an invisible static obstacle (e.g. footer section)
+    // Registers an invisible static obstacle (e.g. footer section). Safe to do
+    // before the simulation starts — it simply sits in the world until then.
     const handleRegisterObstacle = e => {
       const { id, x, y, width, height } = e.detail;
       const existing = obstacleMapRef.current.get(id);
@@ -114,6 +146,7 @@ const MatterJSCanvas = () => {
 
     // Click anywhere below the hero to shake all sprites upward
     const handleDocumentClick = e => {
+      if (!started) return;
       if (e.clientY + window.scrollY < window.innerHeight) return;
       for (const bodyId of spriteMapRef.current.keys()) {
         const body = Matter.Composite.get(world, bodyId, 'body');
@@ -126,37 +159,12 @@ const MatterJSCanvas = () => {
     };
     document.addEventListener('click', handleDocumentClick);
 
-    const render = Matter.Render.create({
-      canvas: canvas,
-      engine: engine,
-      options: {
-        width: canvas.width,
-        height: canvas.height,
-        wireframes: false,
-        background: 'transparent',
-      },
-    });
-
-    Matter.Render.run(render);
-    const runner = Matter.Runner.create();
-    Matter.Runner.run(runner, engine);
-    console.log(
-      '[MatterJSCanvas] ready — engine, renderer, and runner are running',
-    );
-
-    const drawnOnce = new Set();
-
+    // Draw the SVG sprites on top of their physics bodies each frame.
     Matter.Events.on(render, 'afterRender', () => {
       const ctx = render.context;
       for (const [bodyId, { img, width, height }] of spriteMapRef.current) {
         const body = Matter.Composite.get(world, bodyId, 'body');
         if (!body) continue;
-        if (!drawnOnce.has(bodyId)) {
-          drawnOnce.add(bodyId);
-          console.log(
-            `[MatterJSCanvas] first draw for body ${bodyId} at (${Math.round(body.position.x)}, ${Math.round(body.position.y)})`,
-          );
-        }
         ctx.save();
         ctx.translate(body.position.x, body.position.y);
         ctx.rotate(body.angle);
@@ -166,19 +174,32 @@ const MatterJSCanvas = () => {
     });
 
     const handleResize = () => {
-      updateCanvasSize();
+      if (!started) return;
+      sizeCanvasToDocument();
       render.options.width = canvas.width;
       render.options.height = canvas.height;
-      render.canvas.width = canvas.width;
-      render.canvas.height = canvas.height;
     };
     window.addEventListener('resize', handleResize);
+
+    // Pause the simulation while the tab is hidden, resume when visible.
+    const handleVisibility = () => {
+      if (!started) return;
+      if (document.hidden) {
+        Matter.Render.stop(render);
+        Matter.Runner.stop(runner);
+      } else {
+        Matter.Render.run(render);
+        Matter.Runner.run(runner, engine);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
 
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('spawnBox', handleSpawn);
       window.removeEventListener('registerObstacle', handleRegisterObstacle);
       document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('visibilitychange', handleVisibility);
       spriteMapRef.current.clear();
       obstacleMapRef.current.clear();
       Matter.Render.stop(render);

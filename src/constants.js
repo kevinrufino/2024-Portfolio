@@ -75,27 +75,7 @@ export const ProjectsData = [
       "Check out Moodie!": MoodieLink
     }],
     liveLink: MoodieLink,
-    scrapeGif: {
-    title: "Minecraft Clone",
-    year: "2022",
-    role: "Creator",
-    type: "Multiplayer WebGL Game",
-    client: "Passion Project",
-    technology: ["React", "Three.js", "Web Sockets", "Procedural Generation", "Physics Simulation"],
-    description:
-      "Developed and collaborated on a 3D WebGL clone of Minecraft with online functionalities. The online functionality uses web sockets to send and retrieve updates utilizing Socket.IO. Being built entirely in R3F, this is proudly the most in depth React Minecraft clone. The game generates a randomized voxel terrain of the world using an algorithm to create a graph of all the block data. The block data is used to construct a 3D geometry of the environment which the player can interact with using a custom physics engine. This terrain generation can support multiple parameters such as environment types. This started as a passion project to learn how a game like Minecraft can create its limitless world.",
-    links: [
-      {
-        "Try it on your machine!": MCFrontEndLink,
-      },
-      {
-        "Boot up a server, play with friends!": MCServerLink
-      }
-    ],
-    liveLink: MCLiveLink,
-    scrapeGif: MCScrapeGif,
-    assets: [mcBlockAsset],
-  },
+    scrapeGif: moodieAsset,
     assets: [moodieAsset],
   },
   {

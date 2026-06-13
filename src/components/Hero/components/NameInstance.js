@@ -60,7 +60,6 @@ const NameInstance = ({
 
     img.onload = () => {
       URL.revokeObjectURL(url);
-      console.log(`[NameInstance] ${nameKey}/${variant} sprite pre-warmed`);
     };
     img.onerror = () => {
       URL.revokeObjectURL(url);

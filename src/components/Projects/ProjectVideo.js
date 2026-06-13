@@ -1,17 +1,84 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { useEffect, useRef, useState } from 'react';
 
-// eslint-disable-next-line react/prop-types
+/**
+ * Project preview tile.
+ *
+ * Performance: video previews are lazy. The <video> ships with preload="none"
+ * and no src until an IntersectionObserver reports the tile is near the
+ * viewport — only then is the source attached and playback started. Off-screen
+ * tiles are paused. This prevents all project videos (tens of MB) from
+ * downloading and decoding on initial page load.
+ *
+ * When `src` points at an image (e.g. a screenshot) it renders a lazy <img>
+ * instead of a <video>.
+ */
+const isImageSrc = src =>
+  typeof src === 'string' && /\.(png|jpe?g|gif|webp|avif)$/i.test(src);
+
 export const ProjectVideo = ({ src }) => {
+  const containerRef = useRef(null);
+  const videoRef = useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  const image = isImageSrc(src);
+
+  // Load + play only while near/in the viewport; pause when scrolled away.
+  useEffect(() => {
+    if (image) return undefined;
+    const el = containerRef.current;
+    if (!el) return undefined;
+
+    const io = new IntersectionObserver(
+      entries => {
+        const entry = entries[0];
+        const video = videoRef.current;
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          if (video && video.readyState >= 2) {
+            video.play().catch(() => {});
+          }
+        } else if (video) {
+          video.pause();
+        }
+      },
+      { rootMargin: '200px 0px', threshold: 0.1 },
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [image]);
+
+  // Once a source is attached, start playing as soon as it can.
+  useEffect(() => {
+    if (!shouldLoad) return undefined;
+    const video = videoRef.current;
+    if (!video) return undefined;
+    const onCanPlay = () => video.play().catch(() => {});
+    video.addEventListener('canplay', onCanPlay, { once: true });
+    return () => video.removeEventListener('canplay', onCanPlay);
+  }, [shouldLoad]);
+
   return (
-    <div className='md:w-2/3 scroller md:m-6 aspect-video'>
-      <video
-        className='h-full w-full object-cover video'
-        src={src}
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+    <div ref={containerRef} className='md:w-2/3 scroller md:m-6 aspect-video'>
+      {image ? (
+        <img
+          className='h-full w-full object-cover video'
+          src={src}
+          alt=''
+          loading='lazy'
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          className='h-full w-full object-cover video'
+          src={shouldLoad ? src : undefined}
+          loop
+          muted
+          playsInline
+          preload='none'
+        />
+      )}
       {/* @TODO: update mask to pixelated mask */}
       <div className='mask'>
         <svg

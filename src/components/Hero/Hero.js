@@ -1,20 +1,9 @@
-import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import NameRow from './components/NameRow.js';
 import useHeroRowCount from '../../hooks/useHeroRowCount.js';
 
 export const Hero = ({ primaryColor, secondaryColor, setCursor }) => {
   const { rowCount, callbackRef } = useHeroRowCount();
-  const loggedRef = useRef(false);
-
-  useEffect(() => {
-    if (rowCount > 0 && !loggedRef.current) {
-      loggedRef.current = true;
-      console.log(
-        `[Hero] ${rowCount} rows rendered — names are in the DOM and ready to click`,
-      );
-    }
-  }, [rowCount]);
 
   const rows = Array.from({ length: rowCount }, (_, i) => ({
     id: `row-${i}`,
