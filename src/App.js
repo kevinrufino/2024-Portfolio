@@ -12,6 +12,13 @@
  */
 
 import React, { useEffect, Suspense } from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import AppProviders from './context/AppProviders.js';
 import { useCursor } from './context/CursorContext.js';
 import { useTheme } from './context/ThemeContext.js';
@@ -26,6 +33,9 @@ import Cursor from './components/Cursor.js';
 import { Hero } from './components/Hero/Hero.js';
 import { preloadImages } from './services/AssetService.js';
 import MatterJSCanvas from './components/Hero/MatterJSCanvas.js';
+import ProjectPage from './pages/ProjectPage.js';
+import PageTransition from './components/PageTransition.js';
+import Reveal from './components/Reveal.js';
 
 const MikaShaderEffect = React.lazy(
   () => import('./components/ShaderBackground/index.js'),
@@ -73,6 +83,17 @@ const AppContent = () => {
     setCursorType('');
   }, [setCursorType]);
 
+  // Scroll to the hash target after SPA navigation (e.g. "← INDEX" → /#projects)
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!hash) return;
+    const el = document.querySelector(hash);
+    if (el) {
+      const id = setTimeout(() => el.scrollIntoView(), 80);
+      return () => clearTimeout(id);
+    }
+  }, [hash]);
+
   // Get theme colors
   const themeColors = getThemeColors();
 
@@ -88,7 +109,7 @@ const AppContent = () => {
 
       {/* Page content — z:2, on top */}
       <div
-        className={`text-[${themeColors.secondary}] scroll-smooth relative overflow-hidden`}
+        className="text-ultra scroll-smooth relative overflow-hidden grain"
         style={{ position: 'relative' }}
       >
         {/* Hidden easter egg text */}
@@ -119,14 +140,18 @@ const AppContent = () => {
         />
 
         {/* Introduction section */}
-        <Intro
-          secondaryColor={themeColors.secondary}
-          cursor={''}
-          setCursor={setCursorType}
-        />
+        <Reveal>
+          <Intro
+            secondaryColor={themeColors.secondary}
+            cursor={''}
+            setCursor={setCursorType}
+          />
+        </Reveal>
 
         {/* Skills marquee */}
-        <SkillsMarquee loop={0} />
+        <Reveal delay={0.1}>
+          <SkillsMarquee loop={0} />
+        </Reveal>
 
         {/* Projects showcase */}
         <Projects cursor={''} setCursor={setCursorType} />
@@ -145,11 +170,44 @@ const AppContent = () => {
  * Implements proper separation of concerns
  * Better performance with optimized re-renders
  */
+/**
+ * Routes keyed by pathname inside AnimatePresence so the pixel-wipe
+ * transition plays between the index and project dossier views
+ */
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <AppContent />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/projects/:slug"
+          element={
+            <PageTransition>
+              <ProjectPage />
+            </PageTransition>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 const AppRefactored = () => {
   return (
-    <AppProviders>
-      <AppContent />
-    </AppProviders>
+    <BrowserRouter>
+      <AppProviders>
+        <AnimatedRoutes />
+      </AppProviders>
+    </BrowserRouter>
   );
 };
 

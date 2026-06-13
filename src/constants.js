@@ -1,3 +1,11 @@
+// Project asset gifs (bundled from src/assets)
+import maxsLabAsset from "./assets/maxs-lab-gif.gif";
+import mcBlockAsset from "./assets/mc-spinning-block.gif";
+import spinning404Asset from "./assets/404spinning-asset.gif";
+import dogewoodAsset from "./assets/dogewood-gif.gif";
+import battlebotAsset from "./assets/battlebot_run.gif";
+import miceAsset from "./assets/mice-gif.gif";
+
 // Project Links
 export const MCFrontEndLink =
   "https://github.com/kevinrufino/minecraft-clone-react";
@@ -37,6 +45,10 @@ export const TINAJCLPGif = "TINAJ-CLP.mp4";
 export const ProjectsData = [
   {
     title: "Max's Lab",
+    year: "2023",
+    role: "Lead Engineer",
+    type: "3D World Experience",
+    client: "Nike .Swoosh",
     technology: ["React", "Three.js", "Next.js", "Blender"],
     description:
       "I lead the development of a fully 3D marketing experience. This experience allowed users to deeply engage in a story of a collection of airmax products by exploring a full 3D world with easter eggs and live world events in support of IRL marketing moments. I worked cross functionally with 3D artists, designers, and project managers and marketing specialists to bring this to life. Feel free to check it out here.",
@@ -44,9 +56,14 @@ export const ProjectsData = [
       "Try Out Max's Lab!": MaxsLabLink
     }],
     scrapeGif: MaxsLabScrapeGif,
+    assets: [maxsLabAsset],
   },
   {
     title: "Our Force 1 Poster Content Display Page",
+    year: "2023",
+    role: "Lead Engineer",
+    type: "Content Display Page",
+    client: "Nike .Swoosh",
     technology: ["React", "Three.js", "Next.js"],
     description:
       "I lead and architected a custom content display page for our OF1 Poster Collection. This page gave users a chance to dive into the world of our NFT collection through an engaging and beatiful page. I helped engineer our sites CMS implementation and created custom and authorable component blocks utilizing cool design features such a paralax effects and cool custom 3D shader to give the posters a wavey effect. I worked with designers and project managers to bring this to our loyal community.",
@@ -54,9 +71,14 @@ export const ProjectsData = [
       "Check Out the CDP!": OurForce1CDPLink
     }],
     scrapeGif: OF1PosterCDPGif,
+    assets: [],
   },
   {
     title: ".Swoosh 404",
+    year: "2023",
+    role: "Engineer",
+    type: "WebGL Game",
+    client: "Nike .Swoosh",
     technology: ["React", "Canvas", "Next.js"],
     description:
       "To support the release of a physical product, I helped developed this space-invaders inspired game giving users eligibilty to purchase based on thier performance. This moment was lead by a site takeover where we glitched the site out and teased release information via decrytbable easter eggs. Worked cross functionally with marketing specialist and experience designers to test and rapidly iterate on this experience.",
@@ -64,18 +86,28 @@ export const ProjectsData = [
       "Check out the .Swoosh Platform!": swoosh404Link
     }],
     scrapeGif: swoosh404ScrapeGif,
+    assets: [spinning404Asset],
   },
   {
     title: "EA Sports FC Partner Page",
+    year: "2023",
+    role: "Engineer",
+    type: "Partner Launch Page",
+    client: "Nike x EA Sports",
     technology: ["React", "Three.js", "Next.js"],
     description: "I helped engineer the authorable custom component/block system for our site, allowing us to build reusable components that can be brought into any page. Using that block system I helped developeed this interable 3D player viewer and FAQ custom component. This page was built to support the launch of the EA Sports FC game and was a collaboration with the EA team.",
     links: [{
       "Check out the EA Partner Page!": EAFCPartnerPageLink
     }],
     scrapeGif: EAFCPartnerPageGif,
+    assets: [],
   },
   {
     title: "Minecraft Clone",
+    year: "2022",
+    role: "Creator",
+    type: "Multiplayer WebGL Game",
+    client: "Passion Project",
     technology: ["React", "Three.js", "Web Sockets", "Procedural Generation", "Physics Simulation"],
     description:
       "Developed and collaborated on a 3D WebGL clone of Minecraft with online functionalities. The online functionality uses web sockets to send and retrieve updates utilizing Socket.IO. Being built entirely in R3F, this is proudly the most in depth React Minecraft clone. The game generates a randomized voxel terrain of the world using an algorithm to create a graph of all the block data. The block data is used to construct a 3D geometry of the environment which the player can interact with using a custom physics engine. This terrain generation can support multiple parameters such as environment types. This started as a passion project to learn how a game like Minecraft can create its limitless world.",
@@ -88,18 +120,28 @@ export const ProjectsData = [
       }
     ],
     scrapeGif: MCScrapeGif,
+    assets: [mcBlockAsset],
   },
   {
     title: "TINAJ Collection Listing Page",
+    year: "2023",
+    role: "Engineer",
+    type: "3D Product Viewer",
+    client: "Nike .Swoosh",
     technology: ["React", "Three.js", "Next.js"],
-    description:"I helped build this page and an authorable and scalable 3D virtual product viewer that can support the display and control of any customizable virtual collectable. These collectables have mutiple traits, animations, and control types.",
+    description: "I helped build this page and an authorable and scalable 3D virtual product viewer that can support the display and control of any customizable virtual collectable. These collectables have mutiple traits, animations, and control types.",
     links: [{
       "Check out the CLP!": TINAJCLPLink
     }],
     scrapeGif: TINAJCLPGif,
+    assets: [],
   },
   {
     title: "Defenders of Dogewood",
+    year: "2022",
+    role: "Engineer",
+    type: "NFT Adventure Game",
+    client: "Dogewood",
     technology: ["React", "Spline.ts", "Ethers.js", "Unity WebGL"],
     description:
       "I helped support the DoD team by refactoring the unity webgl based adventure experience to one that is built in react js using spline to control the animation assets. This experience was exclusive to members who owned a dogewood nft. Players we're able to take doge's on adventures to train them and earn rewards.",
@@ -107,9 +149,14 @@ export const ProjectsData = [
       "The website is down but check it out on the way back machine!": dogewoodLink
     }],
     scrapeGif: dogewoodScrapeGif,
+    assets: [dogewoodAsset, battlebotAsset],
   },
   {
     title: "Anonymice",
+    year: "2022",
+    role: "Engineer",
+    type: "Staking dApp",
+    client: "Anonymice",
     technology: ["React", "CSS", "Ethers.js", "Discord"],
     description:
       "I build the cheeth v2 staking experience for anonymice. This experience allowed users to stake their mice tokens to earn cheeth. Players would stake thier mice in order to help control the supply of the 'in game' economy to have a hand and advantage in the scarcity game. I worked with the team to design and develop the custom staking experience that was easy to use and understand, while also consulting on the tokenomics of the cheeth token.",
@@ -117,14 +164,20 @@ export const ProjectsData = [
       "Check out their new site!": anonymiceLink
     }],
     scrapeGif: anonymiceScrapeGif,
+    assets: [miceAsset],
   },
   {
     title: "SNK-Y Bot",
+    year: "2019",
+    role: "Creator",
+    type: "Automation Bot",
+    client: "College Project",
     technology: ["Vue", "Puppeteer", "Firebase", "Express", "Node.js"],
     description: "A college project that explored the use of web scraping to create a bot that would monitor sneaker releases and notify users of restocks. The bot was built using puppeteer to scrape data from various sneaker sites and automated the purchasing process. The bot was built with a Vue front end and a Firebase backend to store user data and preferences.",
     links: [{
       "Check out the GH!": snkybotLink
     }],
     scrapeGif: snkybotScrapeGif,
+    assets: [],
   },
 ];
