@@ -34,6 +34,7 @@ import { Hero } from './components/Hero/Hero.js';
 import { preloadImages } from './services/AssetService.js';
 import MatterJSCanvas from './components/Hero/MatterJSCanvas.js';
 import ProjectPage from './pages/ProjectPage.js';
+import ProjectPreview from './pages/ProjectPreview.js';
 import PageTransition from './components/PageTransition.js';
 import Reveal from './components/Reveal.js';
 
@@ -195,6 +196,10 @@ const AnimatedRoutes = () => {
               <ProjectPage />
             </PageTransition>
           }
+        />
+        <Route
+          path="/projects/:slug/preview"
+          element={<ProjectPreview />}
         />
       </Routes>
     </AnimatePresence>

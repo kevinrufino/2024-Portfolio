@@ -1,0 +1,240 @@
+- generic [ref=e7]:
+  - paragraph [ref=e8]: if you're reading this, you found a secret ;p
+  - navigation [ref=e9]:
+    - list [ref=e10]:
+      - listitem [ref=e11]:
+        - link "01 Home" [ref=e12] [cursor=pointer]:
+          - /url: /#home
+          - generic [ref=e13]: "01"
+          - generic [ref=e14]: Home
+      - listitem [ref=e15]:
+        - link "02 Intro" [ref=e16] [cursor=pointer]:
+          - /url: /#intro
+          - generic [ref=e17]: "02"
+          - generic [ref=e18]: Intro
+      - listitem [ref=e19]:
+        - link "03 Projects" [ref=e20] [cursor=pointer]:
+          - /url: /#projects
+          - generic [ref=e21]: "03"
+          - generic [ref=e22]: Projects
+      - listitem [ref=e23]:
+        - link "04 Contact" [ref=e24] [cursor=pointer]:
+          - /url: /#contact
+          - generic [ref=e25]: "04"
+          - generic [ref=e26]: Contact
+  - generic [ref=e28]:
+    - generic [ref=e29]:
+      - img [ref=e31]
+      - img [ref=e35]
+    - generic [ref=e38]:
+      - img [ref=e40]
+      - img [ref=e44]
+    - generic [ref=e47]:
+      - img [ref=e49]
+      - img [ref=e53]
+    - generic [ref=e56]:
+      - img [ref=e58]
+      - img [ref=e62]
+    - generic [ref=e65]:
+      - img [ref=e67]
+      - img [ref=e71]
+  - generic [ref=e76]:
+    - heading "Hey!" [level=1] [ref=e77]:
+      - text: Hey!
+      - img [ref=e78]: 👋🏾
+    - heading "I’m Kevin, Front-end Develop|" [level=2] [ref=e79]:
+      - text: I’m Kevin,
+      - generic [ref=e80]:
+        - generic [ref=e81]: Front-end Develop
+        - text: "|"
+    - paragraph [ref=e82]: I enjoy fusing my love for art and tech to build fun interactive experiences. I currently am working at Nike as a Front-end Creative Developer. Check out my work below 👇🏾
+  - generic [ref=e85]:
+    - paragraph [ref=e86]: "skills:"
+    - paragraph [ref=e87]: html, css, javascript, typescript, react, three.js
+    - paragraph [ref=e88]: "soft skills:"
+    - paragraph [ref=e89]: nerd 🤓, designer, gamer, music producer, sneaker collector
+  - generic [ref=e91]:
+    - generic [ref=e92]:
+      - img [ref=e96]
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - paragraph [ref=e100]: 01 — 3D World Experience
+          - paragraph [ref=e101]: "2023"
+        - heading "Max's Lab" [level=1] [ref=e102]
+        - generic [ref=e103]:
+          - paragraph [ref=e104]: React
+          - paragraph [ref=e105]: Three.js
+          - paragraph [ref=e106]: Next.js
+          - paragraph [ref=e107]: Blender
+        - paragraph [ref=e108]: I lead the development of a fully 3D marketing experience. This experience allowed users to deeply engage in a story of a collection of airmax products by exploring a full 3D world with easter eggs and live world events in support of IRL marketing moments. I worked cross functionally with 3D artists, designers, and project managers and marketing specialists to bring this to life. Feel free to check it out here.
+        - generic [ref=e109]:
+          - link "Open Project File →" [ref=e110] [cursor=pointer]:
+            - /url: /projects/max-s-lab
+          - link "Try Out Max's Lab! ↗" [ref=e111] [cursor=pointer]:
+            - /url: https://www.swoosh.nike/m/maxs-lab
+    - generic [ref=e112]:
+      - img [ref=e116]
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - paragraph [ref=e120]: 02 — Content Display Page
+          - paragraph [ref=e121]: "2023"
+        - heading "Our Force 1 Poster Content Display Page" [level=1] [ref=e122]
+        - generic [ref=e123]:
+          - paragraph [ref=e124]: React
+          - paragraph [ref=e125]: Three.js
+          - paragraph [ref=e126]: Next.js
+        - paragraph [ref=e127]: I lead and architected a custom content display page for our OF1 Poster Collection. This page gave users a chance to dive into the world of our NFT collection through an engaging and beatiful page. I helped engineer our sites CMS implementation and created custom and authorable component blocks utilizing cool design features such a paralax effects and cool custom 3D shader to give the posters a wavey effect. I worked with designers and project managers to bring this to our loyal community.
+        - generic [ref=e128]:
+          - link "Open Project File →" [ref=e129] [cursor=pointer]:
+            - /url: /projects/our-force-1-poster-content-display-page
+          - link "Check Out the CDP! ↗" [ref=e130] [cursor=pointer]:
+            - /url: https://www.swoosh.nike/collections/our-force-1-poster
+    - generic [ref=e131]:
+      - img [ref=e135]
+      - generic [ref=e137]:
+        - generic [ref=e138]:
+          - paragraph [ref=e139]: 03 — WebGL Game
+          - paragraph [ref=e140]: "2023"
+        - heading ".Swoosh 404" [level=1] [ref=e141]
+        - generic [ref=e142]:
+          - paragraph [ref=e143]: React
+          - paragraph [ref=e144]: Canvas
+          - paragraph [ref=e145]: Next.js
+        - paragraph [ref=e146]: To support the release of a physical product, I helped developed this space-invaders inspired game giving users eligibilty to purchase based on thier performance. This moment was lead by a site takeover where we glitched the site out and teased release information via decrytbable easter eggs. Worked cross functionally with marketing specialist and experience designers to test and rapidly iterate on this experience.
+        - generic [ref=e147]:
+          - link "Open Project File →" [ref=e148] [cursor=pointer]:
+            - /url: /projects/swoosh-404
+          - link "Check out the .Swoosh Platform! ↗" [ref=e149] [cursor=pointer]:
+            - /url: https://www.swoosh.nike/m/air-force-1-low-404
+    - generic [ref=e150]:
+      - img [ref=e154]
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - paragraph [ref=e158]: 04 — Partner Launch Page
+          - paragraph [ref=e159]: "2023"
+        - heading "EA Sports FC Partner Page" [level=1] [ref=e160]
+        - generic [ref=e161]:
+          - paragraph [ref=e162]: React
+          - paragraph [ref=e163]: Three.js
+          - paragraph [ref=e164]: Next.js
+        - paragraph [ref=e165]: I helped engineer the authorable custom component/block system for our site, allowing us to build reusable components that can be brought into any page. Using that block system I helped developeed this interable 3D player viewer and FAQ custom component. This page was built to support the launch of the EA Sports FC game and was a collaboration with the EA team.
+        - generic [ref=e166]:
+          - link "Open Project File →" [ref=e167] [cursor=pointer]:
+            - /url: /projects/ea-sports-fc-partner-page
+          - link "Check out the EA Partner Page! ↗" [ref=e168] [cursor=pointer]:
+            - /url: https://www.swoosh.nike/p/ea-sports-fc
+    - generic [ref=e169]:
+      - img [ref=e173]
+      - generic [ref=e175]:
+        - generic [ref=e176]:
+          - paragraph [ref=e177]: 05 — Multiplayer WebGL Game
+          - paragraph [ref=e178]: "2022"
+        - heading "Minecraft Clone" [level=1] [ref=e179]
+        - generic [ref=e180]:
+          - paragraph [ref=e181]: React
+          - paragraph [ref=e182]: Three.js
+          - paragraph [ref=e183]: Web Sockets
+          - paragraph [ref=e184]: Procedural Generation
+          - paragraph [ref=e185]: Physics Simulation
+        - paragraph [ref=e186]: Developed and collaborated on a 3D WebGL clone of Minecraft with online functionalities. The online functionality uses web sockets to send and retrieve updates utilizing Socket.IO. Being built entirely in R3F, this is proudly the most in depth React Minecraft clone. The game generates a randomized voxel terrain of the world using an algorithm to create a graph of all the block data. The block data is used to construct a 3D geometry of the environment which the player can interact with using a custom physics engine. This terrain generation can support multiple parameters such as environment types. This started as a passion project to learn how a game like Minecraft can create its limitless world.
+        - generic [ref=e187]:
+          - link "Open Project File →" [ref=e188] [cursor=pointer]:
+            - /url: /projects/minecraft-clone
+          - link "Try it on your machine! ↗" [ref=e189] [cursor=pointer]:
+            - /url: https://github.com/kevinrufino/minecraft-clone-react
+          - link "Boot up a server, play with friends! ↗" [ref=e190] [cursor=pointer]:
+            - /url: https://github.com/GreyDaCaLa/ReactMineCraftCloneServer
+    - generic [ref=e191]:
+      - img [ref=e195]
+      - generic [ref=e197]:
+        - generic [ref=e198]:
+          - paragraph [ref=e199]: 06 — 3D Product Viewer
+          - paragraph [ref=e200]: "2023"
+        - heading "TINAJ Collection Listing Page" [level=1] [ref=e201]
+        - generic [ref=e202]:
+          - paragraph [ref=e203]: React
+          - paragraph [ref=e204]: Three.js
+          - paragraph [ref=e205]: Next.js
+        - paragraph [ref=e206]: I helped build this page and an authorable and scalable 3D virtual product viewer that can support the display and control of any customizable virtual collectable. These collectables have mutiple traits, animations, and control types.
+        - generic [ref=e207]:
+          - link "Open Project File →" [ref=e208] [cursor=pointer]:
+            - /url: /projects/tinaj-collection-listing-page
+          - link "Check out the CLP! ↗" [ref=e209] [cursor=pointer]:
+            - /url: https://www.swoosh.nike/collections/our-force-1-tinaj/products/air-force-1-tinaj/tokens/301?tab=story
+    - generic [ref=e210]:
+      - img [ref=e214]
+      - generic [ref=e216]:
+        - generic [ref=e217]:
+          - paragraph [ref=e218]: 07 — NFT Adventure Game
+          - paragraph [ref=e219]: "2022"
+        - heading "Defenders of Dogewood" [level=1] [ref=e220]
+        - generic [ref=e221]:
+          - paragraph [ref=e222]: React
+          - paragraph [ref=e223]: Spline.ts
+          - paragraph [ref=e224]: Ethers.js
+          - paragraph [ref=e225]: Unity WebGL
+        - paragraph [ref=e226]: I helped support the DoD team by refactoring the unity webgl based adventure experience to one that is built in react js using spline to control the animation assets. This experience was exclusive to members who owned a dogewood nft. Players we're able to take doge's on adventures to train them and earn rewards.
+        - generic [ref=e227]:
+          - link "Open Project File →" [ref=e228] [cursor=pointer]:
+            - /url: /projects/defenders-of-dogewood
+          - link "The website is down but check it out on the way back machine! ↗" [ref=e229] [cursor=pointer]:
+            - /url: https://web.archive.org/web/20220506004107/https://app.dogewoodnft.com/
+    - generic [ref=e230]:
+      - img [ref=e234]
+      - generic [ref=e236]:
+        - generic [ref=e237]:
+          - paragraph [ref=e238]: 08 — Staking dApp
+          - paragraph [ref=e239]: "2022"
+        - heading "Anonymice" [level=1] [ref=e240]
+        - generic [ref=e241]:
+          - paragraph [ref=e242]: React
+          - paragraph [ref=e243]: CSS
+          - paragraph [ref=e244]: Ethers.js
+          - paragraph [ref=e245]: Discord
+        - paragraph [ref=e246]: I build the cheeth v2 staking experience for anonymice. This experience allowed users to stake their mice tokens to earn cheeth. Players would stake thier mice in order to help control the supply of the 'in game' economy to have a hand and advantage in the scarcity game. I worked with the team to design and develop the custom staking experience that was easy to use and understand, while also consulting on the tokenomics of the cheeth token.
+        - generic [ref=e247]:
+          - link "Open Project File →" [ref=e248] [cursor=pointer]:
+            - /url: /projects/anonymice
+          - link "Check out their new site! ↗" [ref=e249] [cursor=pointer]:
+            - /url: https://anonymice.com/
+    - generic [ref=e250]:
+      - img [ref=e254]
+      - generic [ref=e256]:
+        - generic [ref=e257]:
+          - paragraph [ref=e258]: 09 — Automation Bot
+          - paragraph [ref=e259]: "2019"
+        - heading "SNK-Y Bot" [level=1] [ref=e260]
+        - generic [ref=e261]:
+          - paragraph [ref=e262]: Vue
+          - paragraph [ref=e263]: Puppeteer
+          - paragraph [ref=e264]: Firebase
+          - paragraph [ref=e265]: Express
+          - paragraph [ref=e266]: Node.js
+        - paragraph [ref=e267]: A college project that explored the use of web scraping to create a bot that would monitor sneaker releases and notify users of restocks. The bot was built using puppeteer to scrape data from various sneaker sites and automated the purchasing process. The bot was built with a Vue front end and a Firebase backend to store user data and preferences.
+        - generic [ref=e268]:
+          - link "Open Project File →" [ref=e269] [cursor=pointer]:
+            - /url: /projects/snk-y-bot
+          - link "Check out the GH! ↗" [ref=e270] [cursor=pointer]:
+            - /url: https://github.com/kevinrufino/SNK-Y-Bot
+  - contentinfo [ref=e271]:
+    - generic [ref=e272]:
+      - generic [ref=e273]:
+        - paragraph [ref=e275]: 04 — Contact
+        - generic [ref=e276]:
+          - paragraph [ref=e277]: Lets Connect
+          - img "smile" [ref=e278]
+      - generic [ref=e279]:
+        - img "it's a me" [ref=e280]
+        - generic [ref=e281]:
+          - paragraph [ref=e282]: Kevin Rufino
+          - paragraph [ref=e283]: Brooklyn, NY
+          - generic [ref=e284]:
+            - link "Email" [ref=e285] [cursor=pointer]:
+              - /url: "mailto: kevinrufino97@gmail.com"
+            - link "Resume" [ref=e286] [cursor=pointer]:
+              - /url: ./Kevin Rufino's Resume.pdf
+            - link "LinkedIn" [ref=e287] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/kevinrufino/
+            - link "Github" [ref=e288] [cursor=pointer]:
+              - /url: https://github.com/kevinrufino
+    - paragraph [ref=e289]: "* Designed and Developed by Kevin Rufino *"

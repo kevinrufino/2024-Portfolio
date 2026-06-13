@@ -1,0 +1,95 @@
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - list [ref=e5]:
+      - listitem [ref=e6]:
+        - link "01 Home" [ref=e7] [cursor=pointer]:
+          - /url: /#home
+          - generic [ref=e8]: "01"
+          - generic [ref=e9]: Home
+      - listitem [ref=e10]:
+        - link "02 Intro" [ref=e11] [cursor=pointer]:
+          - /url: /#intro
+          - generic [ref=e12]: "02"
+          - generic [ref=e13]: Intro
+      - listitem [ref=e14]:
+        - link "03 Projects" [ref=e15] [cursor=pointer]:
+          - /url: /#projects
+          - generic [ref=e16]: "03"
+          - generic [ref=e17]: Projects
+      - listitem [ref=e18]:
+        - link "04 Contact" [ref=e19] [cursor=pointer]:
+          - /url: /#contact
+          - generic [ref=e20]: "04"
+          - generic [ref=e21]: Contact
+  - main [ref=e22]:
+    - generic [ref=e23]:
+      - link "← INDEX" [ref=e24] [cursor=pointer]:
+        - /url: /#projects
+      - paragraph [ref=e25]: PROJECT FILE 05/09_
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: Passion Project
+          - generic [ref=e30]: "05"
+        - heading "Minecraft Clone" [level=1] [ref=e31]
+        - generic [ref=e32]: Multiplayer WebGL Game
+      - paragraph [ref=e35]: ● LIVE CAPTURE
+      - generic [ref=e36]:
+        - generic [ref=e37]: Year
+        - paragraph [ref=e38]: "2022"
+      - generic [ref=e39]:
+        - generic [ref=e40]: Role
+        - paragraph [ref=e41]: Creator
+      - generic [ref=e42]:
+        - iframe [ref=e43]:
+          - generic [ref=f2e3]:
+            - generic [ref=f2e6]:
+              - heading "CloneCraft" [level=1] [ref=f2e7]
+              - generic [ref=f2e8]:
+                - generic [ref=f2e9]:
+                  - generic [ref=f2e10]: Player Name
+                  - textbox "Player Name" [ref=f2e11]: Player
+                - generic [ref=f2e12]:
+                  - generic [ref=f2e13]: World Seed
+                  - textbox "World Seed" [ref=f2e14]: robo
+                - generic [ref=f2e16]:
+                  - button "Singleplayer" [ref=f2e17] [cursor=pointer]
+                  - button "Multiplayer" [ref=f2e18] [cursor=pointer]
+                - button "PLAY" [ref=f2e19] [cursor=pointer]
+            - generic [ref=f2e20]: CloneCraft — a Minecraft clone
+        - paragraph [ref=e44]: ● LIVE PREVIEW
+      - generic [ref=e45]:
+        - generic [ref=e46]: Briefing
+        - paragraph [ref=e47]: Developed and collaborated on a 3D WebGL clone of Minecraft with online functionalities. The online functionality uses web sockets to send and retrieve updates utilizing Socket.IO. Being built entirely in R3F, this is proudly the most in depth React Minecraft clone. The game generates a randomized voxel terrain of the world using an algorithm to create a graph of all the block data. The block data is used to construct a 3D geometry of the environment which the player can interact with using a custom physics engine. This terrain generation can support multiple parameters such as environment types. This started as a passion project to learn how a game like Minecraft can create its limitless world.
+      - generic [ref=e48]:
+        - generic [ref=e49]: Stack
+        - generic [ref=e50]:
+          - generic [ref=e51]: React
+          - generic [ref=e52]: Three.js
+          - generic [ref=e53]: Web Sockets
+          - generic [ref=e54]: Procedural Generation
+          - generic [ref=e55]: Physics Simulation
+      - generic [ref=e56]:
+        - generic [ref=e57]: Transmissions
+        - generic [ref=e58]:
+          - link "Try it on your machine! ↗" [ref=e59] [cursor=pointer]:
+            - /url: https://github.com/kevinrufino/minecraft-clone-react
+          - link "Boot up a server, play with friends! ↗" [ref=e60] [cursor=pointer]:
+            - /url: https://github.com/GreyDaCaLa/ReactMineCraftCloneServer
+      - generic [ref=e61]:
+        - img "Minecraft Clone artifact 1" [ref=e62]
+        - paragraph [ref=e63]: ARTIFACT_01
+      - generic [ref=e64]:
+        - generic [ref=e65]: KR
+        - generic [ref=e66]: EST. 1997
+      - generic [ref=e69]: Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦ Minecraft Clone — Multiplayer WebGL Game — 2022 ✦
+    - navigation [ref=e70]:
+      - link "← Previous file EA Sports FC Partner Page" [ref=e71] [cursor=pointer]:
+        - /url: /projects/ea-sports-fc-partner-page
+        - generic [ref=e72]: ← Previous file
+        - paragraph [ref=e73]: EA Sports FC Partner Page
+      - link "Next file → TINAJ Collection Listing Page" [ref=e74] [cursor=pointer]:
+        - /url: /projects/tinaj-collection-listing-page
+        - generic [ref=e75]: Next file →
+        - paragraph [ref=e76]: TINAJ Collection Listing Page
+    - paragraph [ref=e77]: "* KEVIN RUFINO — PROJECT ARCHIVE *"

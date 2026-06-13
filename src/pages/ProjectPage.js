@@ -177,22 +177,18 @@ const ProjectPage = () => {
             </p>
           </motion.div>
 
-          {/* Live preview cell — if available */}
+          {/* Live preview link cell — if available */}
           {project.liveLink && (
             <motion.div
               variants={cell}
-              className="cell-hard col-span-2 lg:col-span-12 bg-ultra overflow-hidden relative"
-              style={{ minHeight: '600px' }}
+              className="cell-hard col-span-2 lg:col-span-12 bg-ultra text-acid p-5 md:p-8 flex items-center justify-center"
             >
-              <iframe
-                src={project.liveLink}
-                title={`${project.title} - Live Preview`}
-                className="w-full h-full border-none"
-                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; magnetometer; microphone; midi; payment; usb; xr-spatial-tracking"
-              />
-              <p className="absolute top-3 left-3 font-offbitDot text-[10px] md:text-xs tracking-[0.25em] bg-acid text-ultra px-2 py-1 border-2 border-ultra z-10">
-                ● LIVE PREVIEW
-              </p>
+              <Link
+                to={`/projects/${slug}/preview`}
+                className="font-offbit101Bold text-2xl md:text-4xl border-2 border-acid px-6 py-4 shadow-hard-sm hover:shadow-hard hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all bg-acid text-ultra"
+              >
+                ▶ Open Live Preview
+              </Link>
             </motion.div>
           )}
 
