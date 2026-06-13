@@ -146,7 +146,7 @@ const ProjectPage = () => {
           >
             <video
               className="w-full h-full object-cover aspect-video"
-              src={`/${project.scrapeGif}`}
+              src={project.scrapeGif}
               autoPlay
               loop
               muted

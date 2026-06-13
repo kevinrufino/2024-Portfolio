@@ -23,7 +23,15 @@ export const ProjectVideo = ({ src }) => {
 
   const image = isImageSrc(src);
 
-  // Load + play only while near/in the viewport; pause when scrolled away.
+  // Keep the ref and guarantee the muted property is set on the DOM element.
+  // React's `muted` JSX prop is unreliable, and a non-muted video is blocked
+  // from autoplaying — so set it imperatively.
+  const setVideoEl = el => {
+    videoRef.current = el;
+    if (el) el.muted = true;
+  };
+
+  // Attach src + start playback only while near/in the viewport; pause off-screen.
   useEffect(() => {
     if (image) return undefined;
     const el = containerRef.current;
@@ -34,8 +42,9 @@ export const ProjectVideo = ({ src }) => {
         const entry = entries[0];
         const video = videoRef.current;
         if (entry.isIntersecting) {
-          setShouldLoad(true);
-          if (video && video.readyState >= 2) {
+          setShouldLoad(true); // attaches src on next render
+          if (video) {
+            video.muted = true;
             video.play().catch(() => {});
           }
         } else if (video) {
@@ -49,14 +58,19 @@ export const ProjectVideo = ({ src }) => {
     return () => io.disconnect();
   }, [image]);
 
-  // Once a source is attached, start playing as soon as it can.
+  // Once a source is attached, call play() directly. Under preload="none" the
+  // browser loads nothing until play() is invoked, so we cannot wait for a
+  // `canplay` event (it would never fire) — play() itself kicks off loading.
+  // We also retry on canplay in case the first attempt races the src attach.
   useEffect(() => {
     if (!shouldLoad) return undefined;
     const video = videoRef.current;
     if (!video) return undefined;
-    const onCanPlay = () => video.play().catch(() => {});
-    video.addEventListener('canplay', onCanPlay, { once: true });
-    return () => video.removeEventListener('canplay', onCanPlay);
+    video.muted = true;
+    const tryPlay = () => video.play().catch(() => {});
+    tryPlay();
+    video.addEventListener('canplay', tryPlay);
+    return () => video.removeEventListener('canplay', tryPlay);
   }, [shouldLoad]);
 
   return (
@@ -70,9 +84,10 @@ export const ProjectVideo = ({ src }) => {
         />
       ) : (
         <video
-          ref={videoRef}
+          ref={setVideoEl}
           className='h-full w-full object-cover video'
           src={shouldLoad ? src : undefined}
+          autoPlay
           loop
           muted
           playsInline

@@ -16,6 +16,13 @@ const useHeroRowCount = () => {
       const vh = window.innerHeight;
       if (rowHeight > 0) {
         const rows = numRows(vh, rowHeight, 0.95);
+        // NOTE (perf): row count scales with viewport height and each row
+        // renders two large inline-SVG names (thousands of path points each)
+        // plus an idle-time sprite pre-warm. On very tall displays this can be
+        // a meaningful amount of DOM/paint work. Left intentionally uncapped to
+        // preserve the full-bleed stacked-name design; the 25 ceiling is only a
+        // pathological-case safety bound, not a visual cap. Revisit if hero
+        // mount cost shows up in profiling on large screens.
         setRowCount(Math.min(rows, 25));
       }
     });

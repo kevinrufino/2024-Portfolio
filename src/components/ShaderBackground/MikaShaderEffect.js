@@ -247,6 +247,14 @@ function Scene({ isMobile }) {
 
   const pSpring = useRef(new PointerSpring(0, 0, 15));
 
+  // Cap the heavy control-map repaint + GPU texture upload to ~30fps while the
+  // fullscreen quad keeps compositing at the display's native rate. paintAcc
+  // accumulates delta time; hadActive remembers whether the last painted frame
+  // drew any cells, so once the effect settles to empty we stop re-uploading.
+  const PAINT_INTERVAL = 1 / 30;
+  const paintAccRef = useRef(0);
+  const hadActiveRef = useRef(false);
+
   // ── Compositor uniforms ────────────────────────────────────────────
   const compUniforms = useMemo(
     () => ({
@@ -285,7 +293,22 @@ function Scene({ isMobile }) {
     // control map or re-uploading the texture when nothing is visible.
     if (document.hidden) return;
 
-    const clampedDt = Math.max(Math.min(dt, 1 / 30), 1 / 120);
+    // The fullscreen quad is cheap — composite it every frame so the
+    // background stays smooth even while the control map is throttled.
+    const renderQuad = () => {
+      gl.setRenderTarget(null);
+      gl.render(compScene, compCamera);
+    };
+
+    // Throttle the expensive CPU paint + texture upload to ~30fps.
+    paintAccRef.current += dt;
+    if (paintAccRef.current < PAINT_INTERVAL) {
+      renderQuad();
+      return;
+    }
+    const stepDt = Math.max(Math.min(paintAccRef.current, 1 / 30), 1 / 60);
+    paintAccRef.current = 0;
+
     const t = performance.now() * 0.001;
 
     // Update pointer spring
@@ -295,7 +318,7 @@ function Scene({ isMobile }) {
       x: pointerRef.current.x * dpr - marginPx * dpr,
       y: pointerRef.current.y * dpr,
     };
-    pSpring.current.update(pTgt.x, pTgt.y, clampedDt);
+    pSpring.current.update(pTgt.x, pTgt.y, stepDt);
     const px = pSpring.current.x;
     const py = pSpring.current.y;
 
@@ -305,6 +328,7 @@ function Scene({ isMobile }) {
     ctx.clearRect(0, 0, cW, cH);
 
     // Update and draw cells
+    let activeCount = 0;
     for (const cell of cells) {
       const dx = cell.x - px;
       const dy = cell.y - py;
@@ -314,11 +338,12 @@ function Scene({ isMobile }) {
       const active = dist < warpedRadius;
 
       // Spring physics
-      cell.spring.update(active ? 1 : 0, clampedDt);
+      cell.spring.update(active ? 1 : 0, stepDt);
       const value = cell.spring.x;
 
       // Draw to control map
       if (value > 0.01) {
+        activeCount++;
         const x = cell.x + HALF;
         const y = cell.y + HALF;
 
@@ -362,17 +387,20 @@ function Scene({ isMobile }) {
       }
     }
 
-    // Update canvas texture
-    s.canvasTexture.needsUpdate = true;
+    // Only re-upload the texture when something is painted, or once more to
+    // flush the final clear after the cells settle back to empty. After that we
+    // stop uploading entirely until activity resumes.
+    if (activeCount > 0 || hadActiveRef.current) {
+      s.canvasTexture.needsUpdate = true;
+    }
+    hadActiveRef.current = activeCount > 0;
 
     // Update uniforms
-    compUniforms.uTime.value += clampedDt;
+    compUniforms.uTime.value += stepDt;
     compUniforms.uCanvasMap.value = s.canvasTexture;
     compUniforms.uShiftSize.value = s.shiftSize;
 
-    // Render compositor to screen
-    gl.setRenderTarget(null);
-    gl.render(compScene, compCamera);
+    renderQuad();
   }, 1);
 
   return null;

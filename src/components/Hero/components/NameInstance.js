@@ -34,39 +34,59 @@ const NameInstance = ({
   useEffect(() => {
     const cacheKey = `${nameKey}-${variant}-${fillColor}-${outlineColor}`;
 
-    if (SVG_PREWARM_CACHE.has(cacheKey)) {
-      prewarmedImgRef.current = SVG_PREWARM_CACHE.get(cacheKey);
-      return;
+    const cached = SVG_PREWARM_CACHE.get(cacheKey);
+    if (cached) {
+      prewarmedImgRef.current = cached;
+      return undefined;
     }
 
-    const svgEl = ref.current?.querySelector('svg');
-    if (!svgEl || svgEl.viewBox.baseVal.width === 0) return;
-
-    // Clear stale ref while new image loads
-    prewarmedImgRef.current = null;
-
-    const clone = svgEl.cloneNode(true);
-    clone.setAttribute('width', svgEl.viewBox.baseVal.width);
-    clone.setAttribute('height', svgEl.viewBox.baseVal.height);
-
-    const blob = new Blob([clone.outerHTML], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(blob);
+    // Reserve the cache slot synchronously so sibling instances that mount in
+    // the same batch de-dupe and skip duplicate work. The image's src is filled
+    // in by the deferred build below.
     const img = new Image();
-
-    // Reserve the cache slot immediately so concurrent effects (all 14 run
-    // in the same synchronous batch) see a hit and skip duplicate blob loads.
     SVG_PREWARM_CACHE.set(cacheKey, img);
     prewarmedImgRef.current = img;
 
-    img.onload = () => {
-      URL.revokeObjectURL(url);
+    // Capture the DOM node now: it stays queryable even if this instance later
+    // unmounts or StrictMode re-runs the effect, so the deferred build can
+    // complete independently of the React lifecycle.
+    const node = ref.current;
+
+    // Defer the heavy clone → serialize → decode off the initial render burst.
+    // Each name SVG carries thousands of path points, so building all of them
+    // up front competes with first paint; idle time is soon enough for a
+    // click-to-spawn interaction.
+    const build = () => {
+      if (img.src) return; // idempotent across StrictMode double-invokes
+      const svgEl = node?.querySelector('svg');
+      if (!svgEl || svgEl.viewBox.baseVal.width === 0) return;
+
+      const clone = svgEl.cloneNode(true);
+      clone.setAttribute('width', svgEl.viewBox.baseVal.width);
+      clone.setAttribute('height', svgEl.viewBox.baseVal.height);
+
+      const blob = new Blob([clone.outerHTML], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      img.onload = () => URL.revokeObjectURL(url);
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        if (SVG_PREWARM_CACHE.get(cacheKey) === img) {
+          SVG_PREWARM_CACHE.delete(cacheKey);
+        }
+      };
+      img.src = url;
     };
-    img.onerror = () => {
-      URL.revokeObjectURL(url);
-      SVG_PREWARM_CACHE.delete(cacheKey);
-      prewarmedImgRef.current = null;
-    };
-    img.src = url;
+
+    // Intentionally NOT cancelled on cleanup — the build is cheap and must be
+    // allowed to finish so the shared cached image is populated for spawning,
+    // even across StrictMode's mount→cleanup→mount cycle.
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(build, { timeout: 1500 });
+    } else {
+      window.setTimeout(build, 200);
+    }
+
+    return undefined;
   }, [nameKey, variant, fillColor, outlineColor]);
 
   const handleClick = () => {

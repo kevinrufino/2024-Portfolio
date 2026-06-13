@@ -36,16 +36,17 @@ export const MoodieLink = "https://moo-die-bice.vercel.app/";
 
 // Project Scrape Gifs
 
-export const MCScrapeGif = "Minecraft-Scrape-Video.mp4";
-export const MaxsLabScrapeGif = "maxs-lab-video.mp4";
-export const swoosh404ScrapeGif = "404-error-scrape.mp4";
-export const dogewoodScrapeGif =
-  "dogewood-scrape.mp4";
-export const anonymiceScrapeGif = "cheeth-scrape-video.mp4";
-export const snkybotScrapeGif = "SNKY-Bot-scrape-video.mp4";
-export const OF1PosterCDPGif = "OF1-Poster-CDP.mp4";
-export const EAFCPartnerPageGif = "EAFC-Page.mp4";
-export const TINAJCLPGif = "TINAJ-CLP.mp4";
+// Optimized (≤720p, audio-stripped, faststart) copies live in public/optimized.
+// Originals are retained in public/ as backups.
+export const MCScrapeGif = "/optimized/Minecraft-Scrape-Video.mp4";
+export const MaxsLabScrapeGif = "/optimized/maxs-lab-video.mp4";
+export const swoosh404ScrapeGif = "/optimized/404-error-scrape.mp4";
+export const dogewoodScrapeGif = "/optimized/dogewood-scrape.mp4";
+export const anonymiceScrapeGif = "/optimized/cheeth-scrape-video.mp4";
+export const snkybotScrapeGif = "/optimized/SNKY-Bot-scrape-video.mp4";
+export const OF1PosterCDPGif = "/optimized/OF1-Poster-CDP.mp4";
+export const EAFCPartnerPageGif = "/optimized/EAFC-Page.mp4";
+export const TINAJCLPGif = "/optimized/TINAJ-CLP.mp4";
 
 export const ProjectsData = [
   {
