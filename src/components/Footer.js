@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import Reveal from './Reveal.js';
 
 export const Footer = ({ setCursor }) => {
   const obstacleRef = useRef(null);
@@ -33,17 +34,19 @@ export const Footer = ({ setCursor }) => {
       }}
     >
       <div className='font-offbit101Bold'>
-        <div className='flex items-center max-w-xl ml-4'>
-          <p className='font-offbitDot text-[10px] md:text-xs tracking-[0.3em] uppercase m-2 self-start mt-4 opacity-80'>
-            {'04 — Contact'}
-          </p>
-        </div>
-        <div className='flex max-w-xl ml-4'>
-          <p className='text-4xl md:text-7xl m-2 leading-[0.95]'>
-            {'Lets Connect'}
-          </p>
-          <img src='/smile.svg' alt='smile' className='p-2' />
-        </div>
+        <Reveal>
+          <div className='flex items-center max-w-xl ml-4'>
+            <p className='font-offbitDot text-[10px] md:text-xs tracking-[0.3em] uppercase m-2 self-start mt-4 opacity-80'>
+              {'04 — Contact'}
+            </p>
+          </div>
+          <div className='flex max-w-xl ml-4'>
+            <p className='text-4xl md:text-7xl m-2 leading-[0.95]'>
+              {'Lets Connect'}
+            </p>
+            <img src='/smile.svg' alt='smile' className='p-2' />
+          </div>
+        </Reveal>
         <div
           className='flex flex-col md:flex-row md:text-3xl m-4 w-max'
           ref={obstacleRef}

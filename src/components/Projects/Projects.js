@@ -1,6 +1,7 @@
 import { ProjectsData } from '../../constants.js';
 import { ProjectVideo } from './ProjectVideo.js';
 import { ProjectInfo } from './ProjectInfo.js';
+import Reveal from '../Reveal.js';
 
 export const Projects = ({ setCursor }) => {
   return (
@@ -8,7 +9,7 @@ export const Projects = ({ setCursor }) => {
       <div>
         {ProjectsData.map((project, index) => {
           return (
-            <div
+            <Reveal
               className={`flex flex-col ${
                 index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'
               } justify-center items-center m-3 my-6`}
@@ -19,7 +20,7 @@ export const Projects = ({ setCursor }) => {
             >
               <ProjectVideo src={project.scrapeGif} />
               <ProjectInfo {...project} index={index} />
-            </div>
+            </Reveal>
           );
         })}
       </div>

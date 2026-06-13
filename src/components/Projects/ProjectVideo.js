@@ -3,7 +3,7 @@ import React from 'react';
 // eslint-disable-next-line react/prop-types
 export const ProjectVideo = ({ src }) => {
   return (
-    <div className='md:w-2/3 scroller md:m-6'>
+    <div className='md:w-2/3 scroller md:m-6 aspect-video'>
       <video
         className='h-full w-full object-cover video'
         src={src}
