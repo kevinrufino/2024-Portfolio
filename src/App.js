@@ -65,18 +65,62 @@ const AppContent = () => {
     }
   }, []);
 
-  // Complete loading when fonts are ready, with a 600ms minimum for the animation
+  // Drive the loading screen off real readiness signals rather than a timer:
+  //   1. fonts          — document.fonts.ready
+  //   2. page resources — the window 'load' event (bundle, CSS, initial images)
+  //   3. shader         — the Three.js background paints its first frame
+  //                       (its 211KB chunk is the heaviest thing on the page)
+  // The bar advances as each milestone lands. A minimum keeps it from flashing
+  // on fast loads; a max cap guarantees it can never hang if a signal is missed
+  // (e.g. WebGL unavailable). Below-the-fold project videos are intentionally
+  // excluded — they lazy-load on scroll and shouldn't gate first paint.
   useEffect(() => {
     const MIN_MS = 600;
+    const MAX_MS = 8000;
     const start = Date.now();
-    document.fonts.ready.then(() => {
-      const elapsed = Date.now() - start;
-      const remaining = Math.max(0, MIN_MS - elapsed);
+    const milestones = ['fonts', 'window-load', 'shader'];
+    const done = new Set();
+    let finished = false;
+
+    const reflect = () => {
+      // Map fraction-complete onto the 0..7 internal progress scale.
+      setProgress(Math.round((done.size / milestones.length) * 7));
+    };
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      const remaining = Math.max(0, MIN_MS - (Date.now() - start));
       setTimeout(() => {
         setProgress(7);
         setTimeout(() => setLoadingComplete(), 300);
       }, remaining);
-    });
+    };
+
+    const mark = name => {
+      if (finished || done.has(name)) return;
+      done.add(name);
+      reflect();
+      if (done.size >= milestones.length) finish();
+    };
+
+    document.fonts.ready.then(() => mark('fonts'));
+
+    const onLoad = () => mark('window-load');
+    if (document.readyState === 'complete') onLoad();
+    else window.addEventListener('load', onLoad, { once: true });
+
+    const onShader = () => mark('shader');
+    if (window.__shaderReady) onShader();
+    else window.addEventListener('shader:ready', onShader, { once: true });
+
+    const cap = setTimeout(finish, MAX_MS);
+
+    return () => {
+      clearTimeout(cap);
+      window.removeEventListener('load', onLoad);
+      window.removeEventListener('shader:ready', onShader);
+    };
   }, [setProgress, setLoadingComplete]);
 
   // Handle cursor reset on app load

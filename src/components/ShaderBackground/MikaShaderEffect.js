@@ -254,6 +254,7 @@ function Scene({ isMobile }) {
   const PAINT_INTERVAL = 1 / 30;
   const paintAccRef = useRef(0);
   const hadActiveRef = useRef(false);
+  const readyFiredRef = useRef(false);
 
   // ── Compositor uniforms ────────────────────────────────────────────
   const compUniforms = useMemo(
@@ -298,6 +299,13 @@ function Scene({ isMobile }) {
     const renderQuad = () => {
       gl.setRenderTarget(null);
       gl.render(compScene, compCamera);
+      // Announce once, after the first frame is actually painted to the canvas,
+      // so the loading screen can wait for the heavy 3D background to be ready.
+      if (!readyFiredRef.current) {
+        readyFiredRef.current = true;
+        window.__shaderReady = true;
+        window.dispatchEvent(new Event('shader:ready'));
+      }
     };
 
     // Throttle the expensive CPU paint + texture upload to ~30fps.
