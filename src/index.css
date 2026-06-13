@@ -125,6 +125,14 @@ body {
   animation: marquee-x 18s linear infinite;
 }
 
+/* Skills marquee: two segments translated -50% for a seamless loop. Kept out
+   of the prefers-reduced-motion block below so it always scrolls (by request). */
+.marquee-skills {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 18s linear infinite;
+}
+
 @keyframes blink-caret {
   0%,
   49% {
